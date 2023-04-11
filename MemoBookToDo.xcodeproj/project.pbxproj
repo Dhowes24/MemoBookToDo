@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6B36B0F129CE05CB009D7AB1 /* MemoBookToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */; };
+		6B36B0F329CE05CB009D7AB1 /* MemoPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B0F229CE05CB009D7AB1 /* MemoPageView.swift */; };
+		6B36B0F529CE05CD009D7AB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B36B0F429CE05CD009D7AB1 /* Assets.xcassets */; };
+		6B36B0F829CE05CD009D7AB1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B36B0F729CE05CD009D7AB1 /* Preview Assets.xcassets */; };
+		6B36B10029CE062D009D7AB1 /* MemoBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B0FE29CE062D009D7AB1 /* MemoBook.xcdatamodeld */; };
+		6B36B10229CE0680009D7AB1 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10129CE0680009D7AB1 /* DataController.swift */; };
+		6B36B10629D1FAD8009D7AB1 /* SheetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10529D1FAD8009D7AB1 /* SheetHeaderView.swift */; };
+		6B36B10829D1FB82009D7AB1 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10729D1FB82009D7AB1 /* ColorExtensions.swift */; };
+		6B36B10A29D2008C009D7AB1 /* SheetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10929D2008C009D7AB1 /* SheetRowView.swift */; };
+		6B36B10C29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10B29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift */; };
+		6BCE7D5729E1C6F600EAF3FC /* MemoPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */; };
+		6BCE7D5C29E1D7E700EAF3FC /* BulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */; };
+		6BCE7D5E29E1D90E00EAF3FC /* TaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */; };
+		6BCE7D6029E1DF8A00EAF3FC /* SheetRowSeperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5F29E1DF8A00EAF3FC /* SheetRowSeperator.swift */; };
+		6BCE7D6329E1F1B400EAF3FC /* TaskEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D6229E1F1B400EAF3FC /* TaskEditorView.swift */; };
+		6BCE7D6529E488FB00EAF3FC /* PreviewDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D6429E488FB00EAF3FC /* PreviewDataController.swift */; };
+		6BCE7D6729E4893C00EAF3FC /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D6629E4893C00EAF3FC /* ViewExtensions.swift */; };
+		6BCE7D6929E4900C00EAF3FC /* SheetRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D6829E4900C00EAF3FC /* SheetRowViewModel.swift */; };
+		6BCE7D6C29E5B45900EAF3FC /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D6B29E5B45900EAF3FC /* TextExtensions.swift */; };
+		6BCE7D6E29E5DA0C00EAF3FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D6D29E5DA0C00EAF3FC /* Constants.swift */; };
+		6BFE891529DC83C200B42BA1 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFE891429DC83C200B42BA1 /* PureSwiftUI */; };
+		6BFE891B29DF4A1900B42BA1 /* CrossoutShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE891A29DF4A1900B42BA1 /* CrossoutShapeView.swift */; };
+		6BFE891D29DF4A7100B42BA1 /* ShapeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE891C29DF4A7100B42BA1 /* ShapeExtensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6B36B0ED29CE05CB009D7AB1 /* MemoBookToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoBookToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBookToDoApp.swift; sourceTree = "<group>"; };
+		6B36B0F229CE05CB009D7AB1 /* MemoPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoPageView.swift; sourceTree = "<group>"; };
+		6B36B0F429CE05CD009D7AB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6B36B0F729CE05CD009D7AB1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6B36B0FF29CE062D009D7AB1 /* MemoBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MemoBook.xcdatamodel; sourceTree = "<group>"; };
+		6B36B10129CE0680009D7AB1 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		6B36B10529D1FAD8009D7AB1 /* SheetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeaderView.swift; sourceTree = "<group>"; };
+		6B36B10729D1FB82009D7AB1 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		6B36B10929D2008C009D7AB1 /* SheetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetRowView.swift; sourceTree = "<group>"; };
+		6B36B10B29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeaderPunchHoleView.swift; sourceTree = "<group>"; };
+		6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoPageViewModel.swift; sourceTree = "<group>"; };
+		6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletPoint.swift; sourceTree = "<group>"; };
+		6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskName.swift; sourceTree = "<group>"; };
+		6BCE7D5F29E1DF8A00EAF3FC /* SheetRowSeperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetRowSeperator.swift; sourceTree = "<group>"; };
+		6BCE7D6229E1F1B400EAF3FC /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditorView.swift; sourceTree = "<group>"; };
+		6BCE7D6429E488FB00EAF3FC /* PreviewDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreviewDataController.swift; path = MemoBookToDo/PreviewDataController.swift; sourceTree = SOURCE_ROOT; };
+		6BCE7D6629E4893C00EAF3FC /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		6BCE7D6829E4900C00EAF3FC /* SheetRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetRowViewModel.swift; sourceTree = "<group>"; };
+		6BCE7D6B29E5B45900EAF3FC /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
+		6BCE7D6D29E5DA0C00EAF3FC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6BFE891A29DF4A1900B42BA1 /* CrossoutShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossoutShapeView.swift; sourceTree = "<group>"; };
+		6BFE891C29DF4A7100B42BA1 /* ShapeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeExtensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6B36B0EA29CE05CB009D7AB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BFE891529DC83C200B42BA1 /* PureSwiftUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6B36B0E429CE05CB009D7AB1 = {
+			isa = PBXGroup;
+			children = (
+				6B36B0EF29CE05CB009D7AB1 /* MemoBookToDo */,
+				6B36B0EE29CE05CB009D7AB1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6B36B0EE29CE05CB009D7AB1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6B36B0ED29CE05CB009D7AB1 /* MemoBookToDo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6B36B0EF29CE05CB009D7AB1 /* MemoBookToDo */ = {
+			isa = PBXGroup;
+			children = (
+				6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */,
+				6BFE891629DDCBCB00B42BA1 /* MemoPage */,
+				6BCE7D6429E488FB00EAF3FC /* PreviewDataController.swift */,
+				6BCE7D6A29E5B43E00EAF3FC /* TypeExtensions */,
+				6B36B0FE29CE062D009D7AB1 /* MemoBook.xcdatamodeld */,
+				6B36B10129CE0680009D7AB1 /* DataController.swift */,
+				6BCE7D6D29E5DA0C00EAF3FC /* Constants.swift */,
+				6B36B0F429CE05CD009D7AB1 /* Assets.xcassets */,
+				6B36B0F629CE05CD009D7AB1 /* Preview Content */,
+			);
+			path = MemoBookToDo;
+			sourceTree = "<group>";
+		};
+		6B36B0F629CE05CD009D7AB1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6B36B0F729CE05CD009D7AB1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6BCE7D5429E1C6B600EAF3FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B36B0F229CE05CB009D7AB1 /* MemoPageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6BCE7D5529E1C6C300EAF3FC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6BCE7D5829E1D78A00EAF3FC /* SheetHeader */ = {
+			isa = PBXGroup;
+			children = (
+				6B36B10529D1FAD8009D7AB1 /* SheetHeaderView.swift */,
+				6B36B10B29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift */,
+			);
+			path = SheetHeader;
+			sourceTree = "<group>";
+		};
+		6BCE7D5929E1D7A600EAF3FC /* SheetRow */ = {
+			isa = PBXGroup;
+			children = (
+				6B36B10929D2008C009D7AB1 /* SheetRowView.swift */,
+				6BCE7D6829E4900C00EAF3FC /* SheetRowViewModel.swift */,
+				6BCE7D5A29E1D7CC00EAF3FC /* components */,
+			);
+			path = SheetRow;
+			sourceTree = "<group>";
+		};
+		6BCE7D5A29E1D7CC00EAF3FC /* components */ = {
+			isa = PBXGroup;
+			children = (
+				6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */,
+				6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */,
+				6BFE891A29DF4A1900B42BA1 /* CrossoutShapeView.swift */,
+				6BCE7D5F29E1DF8A00EAF3FC /* SheetRowSeperator.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		6BCE7D6129E1F19F00EAF3FC /* TaskEditor */ = {
+			isa = PBXGroup;
+			children = (
+				6BCE7D6229E1F1B400EAF3FC /* TaskEditorView.swift */,
+			);
+			path = TaskEditor;
+			sourceTree = "<group>";
+		};
+		6BCE7D6A29E5B43E00EAF3FC /* TypeExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				6B36B10729D1FB82009D7AB1 /* ColorExtensions.swift */,
+				6BCE7D6629E4893C00EAF3FC /* ViewExtensions.swift */,
+				6BFE891C29DF4A7100B42BA1 /* ShapeExtensions.swift */,
+				6BCE7D6B29E5B45900EAF3FC /* TextExtensions.swift */,
+			);
+			path = TypeExtensions;
+			sourceTree = "<group>";
+		};
+		6BFE891629DDCBCB00B42BA1 /* MemoPage */ = {
+			isa = PBXGroup;
+			children = (
+				6BCE7D5429E1C6B600EAF3FC /* View */,
+				6BCE7D5529E1C6C300EAF3FC /* ViewModel */,
+				6BFE891729DDDC6300B42BA1 /* components */,
+			);
+			path = MemoPage;
+			sourceTree = "<group>";
+		};
+		6BFE891729DDDC6300B42BA1 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				6BCE7D6129E1F19F00EAF3FC /* TaskEditor */,
+				6BCE7D5829E1D78A00EAF3FC /* SheetHeader */,
+				6BCE7D5929E1D7A600EAF3FC /* SheetRow */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6B36B0EC29CE05CB009D7AB1 /* MemoBookToDo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B36B0FB29CE05CD009D7AB1 /* Build configuration list for PBXNativeTarget "MemoBookToDo" */;
+			buildPhases = (
+				6B36B0E929CE05CB009D7AB1 /* Sources */,
+				6B36B0EA29CE05CB009D7AB1 /* Frameworks */,
+				6B36B0EB29CE05CB009D7AB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MemoBookToDo;
+			packageProductDependencies = (
+				6BFE891429DC83C200B42BA1 /* PureSwiftUI */,
+			);
+			productName = MemoBookToDo;
+			productReference = 6B36B0ED29CE05CB009D7AB1 /* MemoBookToDo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6B36B0E529CE05CB009D7AB1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					6B36B0EC29CE05CB009D7AB1 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 6B36B0E829CE05CB009D7AB1 /* Build configuration list for PBXProject "MemoBookToDo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6B36B0E429CE05CB009D7AB1;
+			packageReferences = (
+				6BFE891329DC83C200B42BA1 /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
+			);
+			productRefGroup = 6B36B0EE29CE05CB009D7AB1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6B36B0EC29CE05CB009D7AB1 /* MemoBookToDo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6B36B0EB29CE05CB009D7AB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B36B0F829CE05CD009D7AB1 /* Preview Assets.xcassets in Resources */,
+				6B36B0F529CE05CD009D7AB1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6B36B0E929CE05CB009D7AB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B36B10029CE062D009D7AB1 /* MemoBook.xcdatamodeld in Sources */,
+				6BCE7D5729E1C6F600EAF3FC /* MemoPageViewModel.swift in Sources */,
+				6BCE7D5C29E1D7E700EAF3FC /* BulletPoint.swift in Sources */,
+				6B36B10A29D2008C009D7AB1 /* SheetRowView.swift in Sources */,
+				6BCE7D6029E1DF8A00EAF3FC /* SheetRowSeperator.swift in Sources */,
+				6B36B10C29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift in Sources */,
+				6BCE7D6529E488FB00EAF3FC /* PreviewDataController.swift in Sources */,
+				6B36B10229CE0680009D7AB1 /* DataController.swift in Sources */,
+				6BFE891D29DF4A7100B42BA1 /* ShapeExtensions.swift in Sources */,
+				6BCE7D5E29E1D90E00EAF3FC /* TaskName.swift in Sources */,
+				6BFE891B29DF4A1900B42BA1 /* CrossoutShapeView.swift in Sources */,
+				6BCE7D6329E1F1B400EAF3FC /* TaskEditorView.swift in Sources */,
+				6BCE7D6729E4893C00EAF3FC /* ViewExtensions.swift in Sources */,
+				6BCE7D6929E4900C00EAF3FC /* SheetRowViewModel.swift in Sources */,
+				6B36B0F329CE05CB009D7AB1 /* MemoPageView.swift in Sources */,
+				6BCE7D6E29E5DA0C00EAF3FC /* Constants.swift in Sources */,
+				6B36B10629D1FAD8009D7AB1 /* SheetHeaderView.swift in Sources */,
+				6BCE7D6C29E5B45900EAF3FC /* TextExtensions.swift in Sources */,
+				6B36B0F129CE05CB009D7AB1 /* MemoBookToDoApp.swift in Sources */,
+				6B36B10829D1FB82009D7AB1 /* ColorExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6B36B0F929CE05CD009D7AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6B36B0FA29CE05CD009D7AB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6B36B0FC29CE05CD009D7AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MemoBookToDo/Preview Content\"";
+				DEVELOPMENT_TEAM = F96TJRTX3X;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = derekhowes.MemoBookToDo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6B36B0FD29CE05CD009D7AB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MemoBookToDo/Preview Content\"";
+				DEVELOPMENT_TEAM = F96TJRTX3X;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = derekhowes.MemoBookToDo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6B36B0E829CE05CB009D7AB1 /* Build configuration list for PBXProject "MemoBookToDo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B36B0F929CE05CD009D7AB1 /* Debug */,
+				6B36B0FA29CE05CD009D7AB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B36B0FB29CE05CD009D7AB1 /* Build configuration list for PBXNativeTarget "MemoBookToDo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B36B0FC29CE05CD009D7AB1 /* Debug */,
+				6B36B0FD29CE05CD009D7AB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6BFE891329DC83C200B42BA1 /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CodeSlicing/pure-swift-ui";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6BFE891429DC83C200B42BA1 /* PureSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6BFE891329DC83C200B42BA1 /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
+			productName = PureSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		6B36B0FE29CE062D009D7AB1 /* MemoBook.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6B36B0FF29CE062D009D7AB1 /* MemoBook.xcdatamodel */,
+			);
+			currentVersion = 6B36B0FF29CE062D009D7AB1 /* MemoBook.xcdatamodel */;
+			path = MemoBook.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6B36B0E529CE05CB009D7AB1 /* Project object */;
+}
