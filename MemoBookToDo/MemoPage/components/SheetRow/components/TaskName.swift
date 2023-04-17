@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct TaskName: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     var grow: Bool
     var name: String
     var priorityColor: Color
@@ -19,7 +17,7 @@ struct TaskName: View {
         ZStack {
             HStack(alignment: .bottom){
                 Text(name)
-                    .foregroundColor(colorScheme == .dark ? paperWhite : offBlack)
+                    .foregroundColor(offBlack)
                     .font(.system(size: taskNameFontSize))
                     .padding(.horizontal, 10)
                     .lineSpacing(15)

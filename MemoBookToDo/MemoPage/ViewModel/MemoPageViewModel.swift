@@ -28,11 +28,18 @@ extension MemoPageView {
             item.dateCreated = Date()
             item.name = name
             item.priority = priority
+            item.uuid = UUID()
 
             saveData()
         }
         
         func deleteItem(_ item: ListItem) {
+            withAnimation(Animation.easeInOut(duration: 0.5)) {
+                
+                items.removeAll { listItem in
+                    listItem.uuid == item.uuid
+                }
+            }
             container.viewContext.delete(item)
             saveData()
         }

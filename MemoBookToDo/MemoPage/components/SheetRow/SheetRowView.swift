@@ -10,8 +10,9 @@ import SwiftUI
 struct SheetRowView: View {
     @Environment(\.colorScheme) var colorScheme
     
-    @State private var completed: Bool = false
+    @State private var completed: Bool
     @State var delete: Bool = false
+    @State private var dragAmount = CGSize.zero
     var distances: [UInt8]
     @State private var grow: Bool = false
     var item: ListItem?
@@ -24,8 +25,10 @@ struct SheetRowView: View {
     
     init(item: ListItem? = nil, initalLoad: Binding<Bool>, number: Double = 0, saveItem: ( () -> Void)? = nil, deleteItem: ( (ListItem) -> Void)? = nil) {
         
+        _completed = State(initialValue: item?.completed ?? false)
         self.distances = item?.name?.asciiValues ?? [8,8,8,8]
         self.item = item
+        
         self._initalLoad = initalLoad
         
         let nameWidth: CGFloat = item?.name?.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width ?? 0
@@ -38,7 +41,6 @@ struct SheetRowView: View {
         self.number = number
         self.saveItem = saveItem
         self.deleteItem = deleteItem
-        
     }
     
     var body: some View {
@@ -46,30 +48,61 @@ struct SheetRowView: View {
                 if let item = item{
                     Group {
                         ZStack(){
-                            HStack(){
-                                BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
-                                    .offset(x:0, y: multiline ? -20 : 0)
-                                TaskName(grow: grow, name: item.name ?? "ERROR", priorityColor: priorityColor(item), multiline: multiline)
-                                Spacer()
-                            }
-                            CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number)
-                                .offset(x:0, y: multiline ? -20 : 0)
-                            
                             if multiline {
-                                CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number, multi: true)
-                                    .offset(x:0, y: 20)
+                                SheetRowSeperator()
                             }
+                            
+                            Group{
+                                HStack(){
+                                    BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
+                                        .offset(x:0, y: multiline ? -20 : 0)
+                                    TaskName(grow: grow, name: item.name ?? "ERROR", priorityColor: priorityColor(item), multiline: multiline)
+                                    Spacer()
+                                }
+                                .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
+
+                                CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number)
+                                    .offset(x:0, y: multiline ? -20 : 0)
+                                
+                                if multiline {
+                                    CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number, multi: true)
+                                        .offset(x:0, y: 20)
+                                        .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
+                                }
+                            }
+                            
+                            Image(sfSymbol: "trash")
+                                .frame(width: 40, height: multiline ?  doubleRowHeight : rowHeight)
+                                .foregroundColor(paperWhite)
+                                .background(
+                                    Rectangle()
+                                        .fill(.red)
+                                        )
+                                .offset(x: abs(dragAmount.width) > 60 ?
+                                        UIScreen.mainWidth/2 - 20
+                                        : UIScreen.mainWidth/2 + 20 - (40 * (abs(dragAmount.width) / 60))
+                                )
                         }
-                        .opacity(delete ? 0 : 1)
                     }
-                    .contextMenu{
-                        Button("Delete Item", action: {
-                            if let deleteItem = deleteItem {
-                                deleteItem(item)
-                            }
-                        })
-                        Button("Edit Item", action: {})
-                    }
+                    .gesture(
+                        DragGesture()
+                            .onChanged({
+                                if $0.translation.width < 0 {
+                                    dragAmount = $0.translation
+                                }
+                            })
+                            .onEnded({ _ in
+                                withAnimation(Animation.linear(duration: 0.3)) {
+                                    if dragAmount.width < -60 {
+                                        delete.toggle()
+                                        if let deleteItem = deleteItem {
+                                            deleteItem(item)
+                                        }
+                                    }
+                                    dragAmount = .zero
+                                }
+                            })
+                    )
                     .onTapGesture(perform: {
                         initalLoad = false
                         withAnimation(Animation.easeInOut(duration: animationDuration)) {
@@ -87,7 +120,7 @@ struct SheetRowView: View {
                 }
         }
         .frame(maxWidth: .infinity,
-               minHeight: rowHeight,
+               minHeight: multiline ?  doubleRowHeight : rowHeight,
                maxHeight: multiline ?  doubleRowHeight : rowHeight )
     }
     
@@ -100,7 +133,7 @@ struct SheetRowView: View {
         case 3:
             return priorityHigh
         default:
-            return paperWhite
+            return paperWhite.opacity(0)
         }
     }
 }

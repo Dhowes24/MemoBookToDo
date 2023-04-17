@@ -11,11 +11,13 @@ import PureSwiftUI
 private let gridLayoutGuide = LayoutGuideConfig.grid(columns: 20, rows: 20)
 
 struct SheetHeaderPunchHoleView: View {
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         VStack{
             ZStack {
                 Circle()
-                    .fill(offBlack)
+                    .fill(colorScheme == .dark ? .black : offBlack)
                     .frame(width: 30,height: 30, alignment: .leading)
                     .padding(.horizontal, 4)
                 

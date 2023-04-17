@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct MemoPageView: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     @StateObject private var vm = MemoPageViewModel()
     
     init() {
@@ -26,28 +26,29 @@ struct MemoPageView: View {
                         VStack(spacing: 0){
                             ForEach(0..<numOfRows, id: \.self) { item in
                                 SheetRowSeperator()
+
                                 SheetRowView(initalLoad: .constant(false))
                             }
                             SheetRowSeperator()
                         }
                         
                         VStack(spacing: 0){
-                            ForEach(Array(zip(vm.items.indices, vm.items)), id: \.0) { index, item in
-                                SheetRowSeperator()
-                                
-                                SheetRowView(
-                                    item: item,
-                                    initalLoad: $vm.initalLoad,
-                                    number: Double(index),
-                                    saveItem: {vm.saveData()},
-                                    deleteItem: {_ in vm.deleteItem(item)})
+                            ForEach(vm.items, id: \.self) { item in
+                                    SheetRowSeperator()
+                                    
+                                    SheetRowView(
+                                        item: item,
+                                        initalLoad: $vm.initalLoad,
+                                        number: 0,
+                                        saveItem: {vm.saveData()},
+                                        deleteItem: {_ in vm.deleteItem(item)})
                             }
                         }
                     }
                     .offset(y:-10)
                 }
             }
-            .backgroundColor(paperWhite)
+            .backgroundColor(colorScheme == .dark ? offBlack : paperWhite)
             .ignoresSafeArea()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
                 ZStack(alignment: .center){
