@@ -61,7 +61,6 @@ struct squiggle: Shape {
     let spacing: Int = 10
     
     func path(in rect: CGRect) -> Path {
-
         var path = Path()
         let g = gridLayoutGuide.layout(in: rect)
         var curves = [Curve]()
@@ -86,30 +85,6 @@ struct squiggle: Shape {
         for curve in curves {
             path.curve(curve.p, cp1: curve.cp1, cp2: curve.cp2)
         }
-        
-//        let p2 = g[6,2]
-//        path.curve(p2, cp1: g[6, 1], cp2: g[6, 1])
-//
-//        let p3 = g[5, 7]
-//        path.curve(p3, cp1: g[5, 4], cp2: g[4, 7])
-//
-//        let p4 = g[16,3]
-//        path.curve(p4, cp1: g[16,2], cp2: g[16,2])
-//
-//        let p5 = g[15,8]
-//        path.curve(p5, cp1: g[15,5], cp2: g[14,8])
-//
-//        let p6 = g[24,2]
-//        path.curve(p6, cp1: g[24, 1], cp2: g[24, 1])
-//
-//        let p7 = g[24,7]
-//        path.curve(p7, cp1: g[24,4], cp2: g[23,7])
-//
-//        let p8 = g[34,3]
-//        path.curve(p8, cp1: g[34,2], cp2: g[34,2])
-//
-//        let p9 = g[34,8]
-//        path.curve(p9, cp1: g[34,5], cp2: g[33,8])
 
         let endPoint = g[46,4]
         path.curve(endPoint, cp1: endPoint, cp2: endPoint)

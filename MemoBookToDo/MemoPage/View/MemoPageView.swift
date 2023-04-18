@@ -34,15 +34,15 @@ struct MemoPageView: View {
                         }
                         
                         VStack(spacing: 0){
-                            ForEach(vm.items, id: \.self) { item in
+                            ForEach(Array(vm.items), id: \.self) { item in
                                     SheetRowSeperator()
                                     
                                     SheetRowView(
                                         item: item,
                                         initalLoad: $vm.initalLoad,
-                                        number: 0,
+                                        number: Double(vm.items.firstIndex(of: item) ?? 0),
                                         saveItem: {vm.saveData()},
-                                        deleteItem: {_ in vm.deleteItem(item)})
+                                        deleteItem: {_ in vm.deleteItem(item) })
                             }
                         }
                     }

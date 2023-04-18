@@ -39,7 +39,7 @@ struct SheetHeaderView: View {
                     Spacer()
                 }
                 
-                Text("\(orientation.isLandscape.description)")
+                Text("Today")
                     .font(.system(size: 36))
                 Text("dd/mm/yyyy")
                     .font(.system(size: 14))

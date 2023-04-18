@@ -25,10 +25,6 @@ struct BulletPoint: View {
                     RoundedRectangle(5)
                         .offset(x:0, y: grow ? -diameter: 0)
                         .rotate(45.degrees)
-                        .transaction { transaction in
-                            transaction.animation = Animation.linear(duration: 0.25).delay(
-                                initalLoad ? number * 0.25 : 0)
-                        }
                 }
         }
     }

@@ -25,12 +25,10 @@ struct SheetRowView: View {
     var deleteItem: ((ListItem) -> Void)?
     
     init(item: ListItem? = nil, initalLoad: Binding<Bool>, number: Double = 0, saveItem: ( () -> Void)? = nil, deleteItem: ( (ListItem) -> Void)? = nil) {
-        
-        _completed = State(initialValue: item?.completed ?? false)
+        _completed = State(initialValue: false)
         self.distances = item?.name?.asciiValues ?? [8,8,8,8]
         self.item = item
-        
-        self._initalLoad = initalLoad
+        _initalLoad = initalLoad
         
         let nameWidth: CGFloat = item?.name?.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width ?? 0
         if nameWidth > taskWidthAvaliable {
@@ -49,22 +47,22 @@ struct SheetRowView: View {
                 if let item = item{
                     Group {
                         ZStack(){
-                            if multiline && orientation.isPortrait{
+                            if multiline && !orientation.isLandscape{
                                 SheetRowSeperator()
                             }
                             Group{
                                 HStack(){
                                     BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
-                                        .offset(x:0, y: (multiline && orientation.isPortrait) ? -20 : 0)
-                                    TaskName(grow: grow, name: item.name ?? "ERROR", priorityColor: priorityColor(item), multiline: (multiline && orientation.isPortrait))
+                                        .offset(x:0, y: (multiline && !orientation.isLandscape) ? -20 : 0)
+                                    TaskName(grow: grow, name: item.name ?? "ERROR", priorityColor: priorityColor(item), multiline: (multiline && !orientation.isLandscape))
                                     Spacer()
                                 }
                                 .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
 
                                 CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number)
-                                    .offset(x:0, y: (multiline && orientation.isPortrait) ? -20 : 0)
+                                    .offset(x:0, y: (multiline && !orientation.isLandscape) ? -20 : 0)
                                 
-                                if multiline && orientation.isPortrait {
+                                if multiline && !orientation.isLandscape {
                                     CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number, multi: true)
                                         .offset(x:0, y: 20)
                                         .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
@@ -95,6 +93,7 @@ struct SheetRowView: View {
                                 withAnimation(Animation.linear(duration: 0.3)) {
                                     if dragAmount.width < -60 {
                                         delete.toggle()
+                                        
                                         if let deleteItem = deleteItem {
                                             deleteItem(item)
                                         }
@@ -120,8 +119,9 @@ struct SheetRowView: View {
                 }
         }
         .frame(maxWidth: .infinity,
-               minHeight: (multiline && orientation.isPortrait) ?  doubleRowHeight : rowHeight,
-               maxHeight: (multiline && orientation.isPortrait) ?  doubleRowHeight : rowHeight )
+               minHeight: (multiline && !orientation.isLandscape) ?  doubleRowHeight : rowHeight,
+               maxHeight: (multiline && !orientation.isLandscape) ?  doubleRowHeight : rowHeight )
+        .background(paperWhite)
         .onRotate { newOrientation in
             orientation = newOrientation
         }
