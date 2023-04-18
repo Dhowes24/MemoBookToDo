@@ -13,6 +13,7 @@ extension MemoPageView {
     @MainActor class MemoPageViewModel: ObservableObject {
         
         let container: NSPersistentContainer
+        @Published private var orientation = UIDeviceOrientation.unknown
         @Published var initalLoad: Bool = true
         @Published var items: [ListItem] = []
         @Published var showTaskEditor: Bool = false

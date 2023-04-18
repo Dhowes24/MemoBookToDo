@@ -8,6 +8,7 @@ import SwiftUI
 
 struct MemoPageView: View {
     @Environment(\.colorScheme) var colorScheme
+    @State private var orientation = UIDeviceOrientation.unknown
     @StateObject private var vm = MemoPageViewModel()
     
     init() {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SheetRowView: View {
     @Environment(\.colorScheme) var colorScheme
+    @State private var orientation = UIDeviceOrientation.unknown
     
     @State private var completed: Bool
     @State var delete: Bool = false
@@ -17,7 +18,7 @@ struct SheetRowView: View {
     @State private var grow: Bool = false
     var item: ListItem?
     @Binding var initalLoad: Bool
-    let multiline: Bool
+    @State var multiline: Bool
     var number: Double = 0
 
     var saveItem: (() -> Void)?
@@ -33,9 +34,9 @@ struct SheetRowView: View {
         
         let nameWidth: CGFloat = item?.name?.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width ?? 0
         if nameWidth > taskWidthAvaliable {
-            self.multiline = true
+            _multiline = State(initialValue: true)
         } else {
-            self.multiline = false
+            _multiline = State(initialValue: false)
         }
         
         self.number = number
@@ -48,23 +49,22 @@ struct SheetRowView: View {
                 if let item = item{
                     Group {
                         ZStack(){
-                            if multiline {
+                            if multiline && orientation.isPortrait{
                                 SheetRowSeperator()
                             }
-                            
                             Group{
                                 HStack(){
                                     BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
-                                        .offset(x:0, y: multiline ? -20 : 0)
-                                    TaskName(grow: grow, name: item.name ?? "ERROR", priorityColor: priorityColor(item), multiline: multiline)
+                                        .offset(x:0, y: (multiline && orientation.isPortrait) ? -20 : 0)
+                                    TaskName(grow: grow, name: item.name ?? "ERROR", priorityColor: priorityColor(item), multiline: (multiline && orientation.isPortrait))
                                     Spacer()
                                 }
                                 .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
 
                                 CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number)
-                                    .offset(x:0, y: multiline ? -20 : 0)
+                                    .offset(x:0, y: (multiline && orientation.isPortrait) ? -20 : 0)
                                 
-                                if multiline {
+                                if multiline && orientation.isPortrait {
                                     CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number, multi: true)
                                         .offset(x:0, y: 20)
                                         .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
@@ -120,8 +120,11 @@ struct SheetRowView: View {
                 }
         }
         .frame(maxWidth: .infinity,
-               minHeight: multiline ?  doubleRowHeight : rowHeight,
-               maxHeight: multiline ?  doubleRowHeight : rowHeight )
+               minHeight: (multiline && orientation.isPortrait) ?  doubleRowHeight : rowHeight,
+               maxHeight: (multiline && orientation.isPortrait) ?  doubleRowHeight : rowHeight )
+        .onRotate { newOrientation in
+            orientation = newOrientation
+        }
     }
     
     func priorityColor(_ item: ListItem) -> Color{

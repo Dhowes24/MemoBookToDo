@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SheetHeaderView: View {
     @Environment(\.colorScheme) var colorScheme
+    @State private var orientation = UIDeviceOrientation.unknown
     
     var deleteItems: () -> Void
     @Binding var initalLoad: Bool
@@ -38,7 +39,7 @@ struct SheetHeaderView: View {
                     Spacer()
                 }
                 
-                Text("Today")
+                Text("\(orientation.isLandscape.description)")
                     .font(.system(size: 36))
                 Text("dd/mm/yyyy")
                     .font(.system(size: 14))
@@ -58,12 +59,20 @@ struct SheetHeaderView: View {
                             .padding(.horizontal, 15)
                             .padding(.bottom, 5)
                             .foregroundColor(colorScheme == .dark ? paperWhite : offBlack)
+                            .offset(x: orientation.isLandscape ? -60 : 0)
                     }
                 }
             }
         }
-        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.25)
+        .frame(
+            width: UIScreen.main.bounds.width,
+            height: orientation.isLandscape ? 220 :
+            UIScreen.main.bounds.height * 0.25)
         .padding(0)
+        .offset(x: orientation.isLandscape ? -20 : 0)
+        .onRotate { newOrientation in
+            orientation = newOrientation
+        }
     }
 }
 
