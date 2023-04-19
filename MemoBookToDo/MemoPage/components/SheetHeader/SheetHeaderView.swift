@@ -9,15 +9,18 @@ import SwiftUI
 
 struct SheetHeaderView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var orientation = UIDeviceOrientation.unknown
     
+    @Binding var chooseDate: Bool
+    @Binding var date: Date
     var deleteItems: () -> Void
     @Binding var initalLoad: Bool
+    @State private var orientation = UIDeviceOrientation.unknown
     @Binding var showTaskEditor: Bool
     
     var body: some View {
         GeometryReader { geo in
             let numOfHoles = Int(geo.size.width / 46)
+            
             VStack(spacing: 0){
                 HStack {
                     ForEach(0..<numOfHoles, id: \.self) { _ in
@@ -28,7 +31,9 @@ struct SheetHeaderView: View {
                 
                 HStack {
                     Button {
-                        deleteItems()
+                        withAnimation {
+                            chooseDate = true
+                        }
                     } label: {
                         Image(systemName: "calendar")
                             .resizable()
@@ -39,9 +44,9 @@ struct SheetHeaderView: View {
                     Spacer()
                 }
                 
-                Text("Today")
+                Text(todaysName())
                     .font(.system(size: 36))
-                Text("dd/mm/yyyy")
+                Text(date, style: .date)
                     .font(.system(size: 14))
                 
                 HStack {
@@ -74,11 +79,28 @@ struct SheetHeaderView: View {
             orientation = newOrientation
         }
     }
+    
+    func todaysName() -> String{
+        let f = DateFormatter()
+        let diff = Calendar.current.numberOfDaysBetween(Date.now, and: date)
+
+        switch diff {
+        case -1:
+            return "Yesterday"
+        case 0:
+            return "Today"
+        case 1:
+            return "Tomorrow"
+        default:
+            return f.weekdaySymbols[Calendar.current.component(.weekday, from: date)]
+        }
+    }
 }
 
 struct SheetHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        SheetHeaderView  (deleteItems: {
+        SheetHeaderView  (chooseDate: .constant(false), date: .constant(Date.now),
+            deleteItems: {
             //
         }, initalLoad: .constant(true),
                           

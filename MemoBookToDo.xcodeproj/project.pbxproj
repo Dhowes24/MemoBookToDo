@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B30882129F040CD008E29F6 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B30882029F040CD008E29F6 /* DatePickerView.swift */; };
 		6B36B0F129CE05CB009D7AB1 /* MemoBookToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */; };
 		6B36B0F329CE05CB009D7AB1 /* MemoPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B0F229CE05CB009D7AB1 /* MemoPageView.swift */; };
 		6B36B0F529CE05CD009D7AB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B36B0F429CE05CD009D7AB1 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 		6B36B10829D1FB82009D7AB1 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10729D1FB82009D7AB1 /* ColorExtensions.swift */; };
 		6B36B10A29D2008C009D7AB1 /* SheetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10929D2008C009D7AB1 /* SheetRowView.swift */; };
 		6B36B10C29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10B29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift */; };
+		6B7F8BFC29F055220084DFE3 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F8BFB29F055220084DFE3 /* CalendarExtensions.swift */; };
 		6BCE7D5729E1C6F600EAF3FC /* MemoPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */; };
 		6BCE7D5C29E1D7E700EAF3FC /* BulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */; };
 		6BCE7D5E29E1D90E00EAF3FC /* TaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */; };
@@ -32,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B30882029F040CD008E29F6 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		6B36B0ED29CE05CB009D7AB1 /* MemoBookToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoBookToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBookToDoApp.swift; sourceTree = "<group>"; };
 		6B36B0F229CE05CB009D7AB1 /* MemoPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoPageView.swift; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 		6B36B10729D1FB82009D7AB1 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		6B36B10929D2008C009D7AB1 /* SheetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetRowView.swift; sourceTree = "<group>"; };
 		6B36B10B29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeaderPunchHoleView.swift; sourceTree = "<group>"; };
+		6B7F8BFB29F055220084DFE3 /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoPageViewModel.swift; sourceTree = "<group>"; };
 		6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletPoint.swift; sourceTree = "<group>"; };
 		6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskName.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 		6BCE7D6A29E5B43E00EAF3FC /* TypeExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				6B7F8BFB29F055220084DFE3 /* CalendarExtensions.swift */,
 				6B36B10729D1FB82009D7AB1 /* ColorExtensions.swift */,
 				6BCE7D6629E4893C00EAF3FC /* ViewExtensions.swift */,
 				6BFE891C29DF4A7100B42BA1 /* ShapeExtensions.swift */,
@@ -185,6 +190,7 @@
 		6BFE891729DDDC6300B42BA1 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				6B30882029F040CD008E29F6 /* DatePickerView.swift */,
 				6BCE7D6129E1F19F00EAF3FC /* TaskEditor */,
 				6BCE7D5829E1D78A00EAF3FC /* SheetHeader */,
 				6BCE7D5929E1D7A600EAF3FC /* SheetRow */,
@@ -287,6 +293,8 @@
 				6BCE7D6C29E5B45900EAF3FC /* TextExtensions.swift in Sources */,
 				6B36B0F129CE05CB009D7AB1 /* MemoBookToDoApp.swift in Sources */,
 				6B36B10829D1FB82009D7AB1 /* ColorExtensions.swift in Sources */,
+				6B7F8BFC29F055220084DFE3 /* CalendarExtensions.swift in Sources */,
+				6B30882129F040CD008E29F6 /* DatePickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

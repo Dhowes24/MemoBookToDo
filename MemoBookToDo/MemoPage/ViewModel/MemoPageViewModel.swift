@@ -13,6 +13,8 @@ extension MemoPageView {
     @MainActor class MemoPageViewModel: ObservableObject {
         
         let container: NSPersistentContainer
+        @Published var chooseDate: Bool = false
+        @Published var date: Date = Date.now
         @Published private var orientation = UIDeviceOrientation.unknown
         @Published var initalLoad: Bool = true
         @Published var items: [ListItem] = []
