@@ -21,7 +21,12 @@ struct MemoPageView: View {
             
             VStack(alignment: .center, spacing: 0) {
                 ScrollView(Axis.Set.vertical) {
-                    SheetHeaderView(chooseDate: $vm.chooseDate, date: $vm.date, deleteItems: {vm.resetCoreData()}, initalLoad: $vm.initalLoad, showTaskEditor: $vm.showTaskEditor)
+                    SheetHeaderView(
+                        chooseDate: $vm.chooseDate,
+                        date: $vm.date,
+                        deleteItems: {vm.resetCoreData()},
+                        initalLoad: $vm.initalLoad,
+                        showTaskEditor: $vm.showTaskEditor)
                     
                     ZStack(alignment: .topLeading){
                         VStack(spacing: 0){
@@ -38,6 +43,7 @@ struct MemoPageView: View {
                                 SheetRowSeperator()
                                 
                                 SheetRowView(
+                                    date: vm.date,
                                     item: item,
                                     initalLoad: $vm.initalLoad,
                                     number: Double(vm.items.firstIndex(of: item) ?? 0),
@@ -70,7 +76,7 @@ struct MemoPageView: View {
         }
         .onChange(of: vm.date) { _ in
             withAnimation {
-                vm.chooseDate = false
+                vm.newLoad()
             }
         }
     }

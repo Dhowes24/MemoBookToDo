@@ -25,11 +25,12 @@ extension MemoPageView {
             fetchItems()
         }
         
-        func addItem(name: String, priority: Int16) {
+        func addItem(name: String, ongoing: Bool,  priority: Int16) {
             let item = ListItem(context: container.viewContext)
             item.completed = false
-            item.dateCreated = Date()
+            item.dateCreated = date
             item.name = name
+            item.onGoing = ongoing
             item.priority = priority
             item.uuid = UUID()
 
@@ -51,7 +52,12 @@ extension MemoPageView {
             let request = NSFetchRequest<ListItem>(entityName: "ListItem")
             
             do {
-                items = try container.viewContext.fetch(request)
+                items = try container.viewContext.fetch(request).filter{
+                    Calendar.current.numberOfDaysBetween($0.dateCreated ?? Date.distantFuture, and: date) == 0 ||
+                    (Calendar.current.numberOfDaysBetween($0.dateCreated ?? Date.distantFuture, and: date) > 0 &&
+                     $0.onGoing &&
+                     Calendar.current.numberOfDaysBetween($0.dateCompleted ?? Date.distantFuture, and: date) <= 0)
+                }
             } catch let error {
                 print("Error fetching. \(error)")
             }
@@ -71,6 +77,12 @@ extension MemoPageView {
             } catch let error {
                 print("Error Saving. \(error)")
             }
+        }
+        
+        func newLoad() {
+            chooseDate = false
+            initalLoad = true
+            fetchItems()
         }
     }
 }

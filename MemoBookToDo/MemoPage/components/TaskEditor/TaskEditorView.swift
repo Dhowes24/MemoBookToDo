@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TaskEditorView: View {
-    var addItem: (String, Int16) -> Void
+    var addItem: (String, Bool, Int16) -> Void
+    @State private var ongoing: Bool = false
     let priorities = ["None", "Low", "Medium", "High"]
     @State private var selection = "None"
     @Binding var showEditor: Bool
@@ -39,9 +40,18 @@ struct TaskEditorView: View {
                     }
                 }.pickerStyle(.segmented)
             }
-            
+            .padding(10)
+
+            HStack {
+                Toggle(isOn: $ongoing) {
+                    Text("Ongoing until completed: ")
+                        .font(.system(size: regularText))
+                }
+            }
+            .padding(10)
+
             Button {
-                self.addItem(taskName, Int16(priorities.firstIndex(of: selection) ?? 0))
+                self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0))
                 withAnimation{
                     showEditor.toggle()
                 }
@@ -55,7 +65,7 @@ struct TaskEditorView: View {
                         .fill(paperWhite)
                         .shadow(radius: 2, x: 0, y:3)
                     )
-                    .padding()
+                    .padding(10)
             }
             .buttonStyle(.plain)
             .disabled(taskName.isEmpty)
@@ -78,7 +88,7 @@ struct TaskEditorView: View {
 
 struct TaskEditorView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskEditorView(addItem: { _, _ in
+        TaskEditorView(addItem: { _,_,_ in
             print("Nothing")
         }, showEditor: .constant(true))
     }

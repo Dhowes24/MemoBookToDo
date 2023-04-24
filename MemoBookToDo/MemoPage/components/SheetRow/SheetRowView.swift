@@ -12,9 +12,10 @@ struct SheetRowView: View {
     @State private var orientation = UIDeviceOrientation.unknown
     
     @State private var completed: Bool
+    private var date: Date
     @State var delete: Bool = false
     @State private var dragAmount = CGSize.zero
-    var distances: [UInt8]
+    private var distances: [UInt8]
     @State private var grow: Bool = false
     var item: ListItem?
     @Binding var initalLoad: Bool
@@ -24,8 +25,9 @@ struct SheetRowView: View {
     var saveItem: (() -> Void)?
     var deleteItem: ((ListItem) -> Void)?
     
-    init(item: ListItem? = nil, initalLoad: Binding<Bool>, number: Double = 0, saveItem: ( () -> Void)? = nil, deleteItem: ( (ListItem) -> Void)? = nil) {
+    init(date: Date = Date.now ,item: ListItem? = nil, initalLoad: Binding<Bool>, number: Double = 0, saveItem: ( () -> Void)? = nil, deleteItem: ( (ListItem) -> Void)? = nil) {
         _completed = State(initialValue: false)
+        self.date = date
         self.distances = item?.name?.asciiValues ?? [8,8,8,8]
         self.item = item
         _initalLoad = initalLoad
@@ -68,57 +70,23 @@ struct SheetRowView: View {
                                         .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
                                 }
                             }
-                            
-                            Image(sfSymbol: "trash")
-                                .frame(width: 40, height: multiline ?  doubleRowHeight : rowHeight)
-                                .foregroundColor(paperWhite)
-                                .background(
-                                    Rectangle()
-                                        .fill(.red)
-                                        )
-                                .offset(x: abs(dragAmount.width) > 60 ?
-                                        UIScreen.mainWidth/2 - 20
-                                        : UIScreen.mainWidth/2 + 20 - (40 * (abs(dragAmount.width) / 60))
-                                )
+                            TrashLabel(dragAmount: dragAmount, multiline: multiline)
                         }
                     }
-                    .gesture(
-                        DragGesture()
-                            .onChanged({
-                                if $0.translation.width < 0 {
-                                    dragAmount = $0.translation
-                                }
-                            })
-                            .onEnded({ _ in
-                                withAnimation(Animation.linear(duration: 0.3)) {
-                                    if dragAmount.width < -60 {
-                                        delete.toggle()
-                                        
-                                        if let deleteItem = deleteItem {
-                                            deleteItem(item)
-                                        }
-                                    }
-                                    dragAmount = .zero
-                                }
-                            })
-                    )
-                    .onTapGesture(perform: {
-                        initalLoad = false
-                        withAnimation(Animation.easeInOut(duration: animationDuration)) {
-                            item.completed.toggle()
-                            completed.toggle()
-                            saveItem!()
-                        }
-                    })
-                    .onAppear {
-                        withAnimation(Animation.easeInOut(duration: animationDuration).delay((initalLoad ? number * initialLoadDelay : 0))) {
-                            grow = true
-                            completed = item.completed
-                        }
-                    }
+                    .modifier(SheetRowViewModifier(
+                        completed: $completed,
+                        date: date,
+                        delete: $delete,
+                        drag: $dragAmount,
+                        grow: $grow,
+                        initalLoad: $initalLoad,
+                        item: item,
+                        number: number,
+                        saveItem: saveItem,
+                        deleteItem: deleteItem))
                 }
-        }
-        .frame(maxWidth: .infinity,
+            }
+            .frame(maxWidth: .infinity,
                minHeight: (multiline && !orientation.isLandscape) ?  doubleRowHeight : rowHeight,
                maxHeight: (multiline && !orientation.isLandscape) ?  doubleRowHeight : rowHeight )
         .background(paperWhite)
@@ -137,6 +105,61 @@ struct SheetRowView: View {
             return priorityHigh
         default:
             return paperWhite.opacity(0)
+        }
+    }
+    
+    struct SheetRowViewModifier: ViewModifier {
+        @Binding var completed: Bool
+        var date: Date
+        @Binding var delete: Bool
+        @Binding var drag : CGSize
+        @Binding var grow: Bool
+        @Binding var initalLoad: Bool
+        var item: ListItem
+        var number: Double
+        
+        var saveItem: (() -> Void)?
+        var deleteItem: ((ListItem) -> Void)?
+        
+        
+        func body(content: Content) -> some View {
+            content
+                .onAppear(perform: {
+                    withAnimation(Animation.easeInOut(duration: animationDuration).delay(initalLoad ? number * initialLoadDelay : 0)) {
+                        grow = true
+                        completed = item.completed
+                    }
+                })
+                .gesture(
+                    DragGesture()
+                        .onChanged({
+                            if $0.translation.width < 0 {
+                                drag = $0.translation
+                            }
+                        })
+                        .onEnded({ _ in
+                            withAnimation(Animation.linear(duration: 0.3)) {
+                                if drag.width < -60 {
+                                    delete.toggle()
+                                    if let deleteItem = deleteItem {
+                                        deleteItem(item)
+                                    }
+                                }
+                                drag = .zero
+                            }
+                        })
+                )
+                .onTapGesture(perform: {
+                    initalLoad = false
+                    withAnimation(Animation.easeInOut(duration: animationDuration)) {
+                        item.completed.toggle()
+                        completed.toggle()
+                        if item.onGoing {
+                            item.dateCompleted = completed ? date : nil
+                        }
+                        saveItem!()
+                    }
+                })
         }
     }
 }

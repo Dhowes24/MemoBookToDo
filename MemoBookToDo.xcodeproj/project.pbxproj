@@ -19,6 +19,7 @@
 		6B36B10A29D2008C009D7AB1 /* SheetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10929D2008C009D7AB1 /* SheetRowView.swift */; };
 		6B36B10C29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10B29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift */; };
 		6B7F8BFC29F055220084DFE3 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F8BFB29F055220084DFE3 /* CalendarExtensions.swift */; };
+		6B7F8C0529F7069E0084DFE3 /* TrashLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F8C0429F7069E0084DFE3 /* TrashLabel.swift */; };
 		6BCE7D5729E1C6F600EAF3FC /* MemoPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */; };
 		6BCE7D5C29E1D7E700EAF3FC /* BulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */; };
 		6BCE7D5E29E1D90E00EAF3FC /* TaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */; };
@@ -47,6 +48,8 @@
 		6B36B10929D2008C009D7AB1 /* SheetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetRowView.swift; sourceTree = "<group>"; };
 		6B36B10B29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeaderPunchHoleView.swift; sourceTree = "<group>"; };
 		6B7F8BFB29F055220084DFE3 /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
+		6B7F8C0129F705ED0084DFE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6B7F8C0429F7069E0084DFE3 /* TrashLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashLabel.swift; sourceTree = "<group>"; };
 		6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoPageViewModel.swift; sourceTree = "<group>"; };
 		6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletPoint.swift; sourceTree = "<group>"; };
 		6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskName.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		6B36B0EF29CE05CB009D7AB1 /* MemoBookToDo */ = {
 			isa = PBXGroup;
 			children = (
+				6B7F8C0129F705ED0084DFE3 /* Info.plist */,
 				6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */,
 				6BFE891629DDCBCB00B42BA1 /* MemoPage */,
 				6BCE7D6429E488FB00EAF3FC /* PreviewDataController.swift */,
@@ -110,6 +114,14 @@
 				6B36B0F729CE05CD009D7AB1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6B7F8BFD29F062080084DFE3 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				6B30882029F040CD008E29F6 /* DatePickerView.swift */,
+			);
+			path = DatePicker;
 			sourceTree = "<group>";
 		};
 		6BCE7D5429E1C6B600EAF3FC /* View */ = {
@@ -153,6 +165,7 @@
 				6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */,
 				6BFE891A29DF4A1900B42BA1 /* CrossoutShapeView.swift */,
 				6BCE7D5F29E1DF8A00EAF3FC /* SheetRowSeperator.swift */,
+				6B7F8C0429F7069E0084DFE3 /* TrashLabel.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -190,7 +203,7 @@
 		6BFE891729DDDC6300B42BA1 /* components */ = {
 			isa = PBXGroup;
 			children = (
-				6B30882029F040CD008E29F6 /* DatePickerView.swift */,
+				6B7F8BFD29F062080084DFE3 /* DatePicker */,
 				6BCE7D6129E1F19F00EAF3FC /* TaskEditor */,
 				6BCE7D5829E1D78A00EAF3FC /* SheetHeader */,
 				6BCE7D5929E1D7A600EAF3FC /* SheetRow */,
@@ -277,6 +290,7 @@
 				6B36B10029CE062D009D7AB1 /* MemoBook.xcdatamodeld in Sources */,
 				6BCE7D5729E1C6F600EAF3FC /* MemoPageViewModel.swift in Sources */,
 				6BCE7D5C29E1D7E700EAF3FC /* BulletPoint.swift in Sources */,
+				6B7F8C0529F7069E0084DFE3 /* TrashLabel.swift in Sources */,
 				6B36B10A29D2008C009D7AB1 /* SheetRowView.swift in Sources */,
 				6BCE7D6029E1DF8A00EAF3FC /* SheetRowSeperator.swift in Sources */,
 				6B36B10C29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift in Sources */,
@@ -426,7 +440,7 @@
 				DEVELOPMENT_TEAM = F96TJRTX3X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = MemoBookToDo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -455,7 +469,7 @@
 				DEVELOPMENT_TEAM = F96TJRTX3X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = MemoBookToDo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

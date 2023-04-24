@@ -92,7 +92,9 @@ struct SheetHeaderView: View {
         case 1:
             return "Tomorrow"
         default:
-            return f.weekdaySymbols[Calendar.current.component(.weekday, from: date)]
+//            let weekDay = Calendar.current.component(.weekday, from: date)
+//            return
+            return f.weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
         }
     }
 }
