@@ -50,6 +50,7 @@
 		6B7F8BFB29F055220084DFE3 /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		6B7F8C0129F705ED0084DFE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6B7F8C0429F7069E0084DFE3 /* TrashLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashLabel.swift; sourceTree = "<group>"; };
+		6B7F8C0629F766700084DFE3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoPageViewModel.swift; sourceTree = "<group>"; };
 		6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletPoint.swift; sourceTree = "<group>"; };
 		6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskName.swift; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 		6B36B0E429CE05CB009D7AB1 = {
 			isa = PBXGroup;
 			children = (
+				6B7F8C0629F766700084DFE3 /* README.md */,
 				6B36B0EF29CE05CB009D7AB1 /* MemoBookToDo */,
 				6B36B0EE29CE05CB009D7AB1 /* Products */,
 			);

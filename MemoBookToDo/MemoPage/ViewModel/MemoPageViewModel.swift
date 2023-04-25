@@ -25,13 +25,14 @@ extension MemoPageView {
             fetchItems()
         }
         
-        func addItem(name: String, ongoing: Bool,  priority: Int16) {
+        func addItem(name: String, ongoing: Bool,  priority: Int16, deadline: Date?) {
             let item = ListItem(context: container.viewContext)
             item.completed = false
             item.dateCreated = date
             item.name = name
             item.onGoing = ongoing
             item.priority = priority
+            item.taskDeadline = deadline
             item.uuid = UUID()
 
             saveData()

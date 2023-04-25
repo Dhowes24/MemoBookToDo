@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct TaskEditorView: View {
-    var addItem: (String, Bool, Int16) -> Void
+    var addItem: (String, Bool, Int16, Date?) -> Void
     @State private var ongoing: Bool = false
     let priorities = ["None", "Low", "Medium", "High"]
+    let regularText: CGFloat = 14
     @State private var selection = "None"
     @Binding var showEditor: Bool
     @State var taskName: String = ""
-    
-    let regularText: CGFloat = 14
-    
+    @State var taskDeadline: Date = Calendar.current.startOfDay(for: Date.now)
+    @State var taskDeadlingBool: Bool = false
+
     var body: some View {
         VStack {
             Text("Add Task")
@@ -41,17 +42,27 @@ struct TaskEditorView: View {
                 }.pickerStyle(.segmented)
             }
             .padding(10)
-
-            HStack {
-                Toggle(isOn: $ongoing) {
-                    Text("Ongoing until completed: ")
-                        .font(.system(size: regularText))
-                }
+            
+            Toggle(isOn: $taskDeadlingBool) {
+                Text("Task Deadline: ")
+                    .font(.system(size: regularText))
             }
             .padding(10)
-
+            
+            if taskDeadlingBool {
+                DatePicker("", selection: $taskDeadline, displayedComponents: .hourAndMinute)
+                    .padding(10)
+            }
+            
+            Toggle(isOn: $ongoing) {
+                Text("Ongoing until completed: ")
+                    .font(.system(size: regularText))
+            }
+            .padding(10)
+            
             Button {
-                self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0))
+                let deadline = taskDeadlingBool ? taskDeadline : nil
+                self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
                 withAnimation{
                     showEditor.toggle()
                 }
@@ -81,14 +92,16 @@ struct TaskEditorView: View {
         .padding()
         .onChange(of: showEditor) { _ in
             taskName = ""
+            taskDeadlingBool = false
+            ongoing = false
+            selection = "None"
         }
-
     }
 }
 
 struct TaskEditorView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskEditorView(addItem: { _,_,_ in
+        TaskEditorView(addItem: { _,_,_,_ in
             print("Nothing")
         }, showEditor: .constant(true))
     }

@@ -18,6 +18,7 @@ struct SheetRowView: View {
     private var distances: [UInt8]
     @State private var grow: Bool = false
     var item: ListItem?
+    let itemName: String
     @Binding var initalLoad: Bool
     @State var multiline: Bool
     var number: Double = 0
@@ -30,9 +31,18 @@ struct SheetRowView: View {
         self.date = date
         self.distances = item?.name?.asciiValues ?? [8,8,8,8]
         self.item = item
+        
+        if item?.taskDeadline != nil {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "hh a"
+            let hourString = formatter.string(from: item!.taskDeadline!)
+            self.itemName = "\(hourString): \(item?.name ?? "Error")"
+        } else {
+            self.itemName = item?.name ?? "Error"
+        }
         _initalLoad = initalLoad
         
-        let nameWidth: CGFloat = item?.name?.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width ?? 0
+        let nameWidth: CGFloat = itemName.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width
         if nameWidth > taskWidthAvaliable {
             _multiline = State(initialValue: true)
         } else {
@@ -56,18 +66,28 @@ struct SheetRowView: View {
                                 HStack(){
                                     BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
                                         .offset(x:0, y: (multiline && !orientation.isLandscape) ? -20 : 0)
-                                    TaskName(grow: grow, name: item.name ?? "ERROR", priorityColor: priorityColor(item), multiline: (multiline && !orientation.isLandscape))
+                                    TaskName(grow: grow,
+                                             name: itemName,
+                                             priorityColor: priorityColor(item),
+                                             multiline: (multiline && !orientation.isLandscape))
                                     Spacer()
                                 }
                                 .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
 
-                                CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number)
-                                    .offset(x:0, y: (multiline && !orientation.isLandscape) ? -20 : 0)
+                                CrossoutShapeView(completed: completed,
+                                                  distances: distances,
+                                                  initalLoad: initalLoad,
+                                                  number: number)
+                                .offset(x:0, y: (multiline && !orientation.isLandscape) ? -20 : 0)
                                 
                                 if multiline && !orientation.isLandscape {
-                                    CrossoutShapeView(completed: completed, distances: distances, initalLoad: initalLoad, number: number, multi: true)
-                                        .offset(x:0, y: 20)
-                                        .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
+                                    CrossoutShapeView(completed: completed,
+                                                      distances: distances,
+                                                      initalLoad: initalLoad,
+                                                      number: number,
+                                                      multi: true)
+                                    .offset(x:0, y: 20)
+                                    .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
                                 }
                             }
                             TrashLabel(dragAmount: dragAmount, multiline: multiline)
@@ -121,7 +141,6 @@ struct SheetRowView: View {
         var saveItem: (() -> Void)?
         var deleteItem: ((ListItem) -> Void)?
         
-        
         func body(content: Content) -> some View {
             content
                 .onAppear(perform: {
@@ -167,7 +186,6 @@ struct SheetRowView: View {
 struct SheetRowView_Previews: PreviewProvider {
     static var previews: some View {
         let previewDataController = PreviewDataController()
-
         let item = previewDataController.savePreviewData()
         
         return SheetRowView(item: item, initalLoad: .constant(false))
