@@ -20,6 +20,9 @@
 		6B36B10C29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B10B29D205FD009D7AB1 /* SheetHeaderPunchHoleView.swift */; };
 		6B7F8BFC29F055220084DFE3 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F8BFB29F055220084DFE3 /* CalendarExtensions.swift */; };
 		6B7F8C0529F7069E0084DFE3 /* TrashLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F8C0429F7069E0084DFE3 /* TrashLabel.swift */; };
+		6B7F8C0829F86FC90084DFE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B7F8C0729F86FC90084DFE3 /* GoogleService-Info.plist */; };
+		6B7F8C0E29F876F70084DFE3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6B7F8C0D29F876F70084DFE3 /* FirebaseAnalytics */; };
+		6B7F8C1029F876F70084DFE3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 6B7F8C0F29F876F70084DFE3 /* FirebaseMessaging */; };
 		6BCE7D5729E1C6F600EAF3FC /* MemoPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */; };
 		6BCE7D5C29E1D7E700EAF3FC /* BulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */; };
 		6BCE7D5E29E1D90E00EAF3FC /* TaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */; };
@@ -51,6 +54,7 @@
 		6B7F8C0129F705ED0084DFE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6B7F8C0429F7069E0084DFE3 /* TrashLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashLabel.swift; sourceTree = "<group>"; };
 		6B7F8C0629F766700084DFE3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6B7F8C0729F86FC90084DFE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BCE7D5629E1C6F600EAF3FC /* MemoPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoPageViewModel.swift; sourceTree = "<group>"; };
 		6BCE7D5B29E1D7E700EAF3FC /* BulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletPoint.swift; sourceTree = "<group>"; };
 		6BCE7D5D29E1D90E00EAF3FC /* TaskName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskName.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B7F8C1029F876F70084DFE3 /* FirebaseMessaging in Frameworks */,
+				6B7F8C0E29F876F70084DFE3 /* FirebaseAnalytics in Frameworks */,
 				6BFE891529DC83C200B42BA1 /* PureSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +111,7 @@
 				6B36B10129CE0680009D7AB1 /* DataController.swift */,
 				6BCE7D6D29E5DA0C00EAF3FC /* Constants.swift */,
 				6B36B0F429CE05CD009D7AB1 /* Assets.xcassets */,
+				6B7F8C0729F86FC90084DFE3 /* GoogleService-Info.plist */,
 				6B36B0F629CE05CD009D7AB1 /* Preview Content */,
 			);
 			path = MemoBookToDo;
@@ -231,6 +238,8 @@
 			name = MemoBookToDo;
 			packageProductDependencies = (
 				6BFE891429DC83C200B42BA1 /* PureSwiftUI */,
+				6B7F8C0D29F876F70084DFE3 /* FirebaseAnalytics */,
+				6B7F8C0F29F876F70084DFE3 /* FirebaseMessaging */,
 			);
 			productName = MemoBookToDo;
 			productReference = 6B36B0ED29CE05CB009D7AB1 /* MemoBookToDo.app */;
@@ -262,6 +271,7 @@
 			mainGroup = 6B36B0E429CE05CB009D7AB1;
 			packageReferences = (
 				6BFE891329DC83C200B42BA1 /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
+				6B7F8C0C29F876F70084DFE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 6B36B0EE29CE05CB009D7AB1 /* Products */;
 			projectDirPath = "";
@@ -279,6 +289,7 @@
 			files = (
 				6B36B0F829CE05CD009D7AB1 /* Preview Assets.xcassets in Resources */,
 				6B36B0F529CE05CD009D7AB1 /* Assets.xcassets in Resources */,
+				6B7F8C0829F86FC90084DFE3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +457,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -475,7 +486,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -513,6 +524,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6B7F8C0C29F876F70084DFE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		6BFE891329DC83C200B42BA1 /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CodeSlicing/pure-swift-ui";
@@ -524,6 +543,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6B7F8C0D29F876F70084DFE3 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B7F8C0C29F876F70084DFE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		6B7F8C0F29F876F70084DFE3 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B7F8C0C29F876F70084DFE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		6BFE891429DC83C200B42BA1 /* PureSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6BFE891329DC83C200B42BA1 /* XCRemoteSwiftPackageReference "pure-swift-ui" */;

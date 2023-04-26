@@ -5,10 +5,10 @@
 //  Created by Derek Howes on 3/24/23.
 //
 import SwiftUI
+import UserNotifications
 
 struct MemoPageView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var orientation = UIDeviceOrientation.unknown
     @StateObject private var vm = MemoPageViewModel()
     
     init() {

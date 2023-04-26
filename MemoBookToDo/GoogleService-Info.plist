@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>628883899097-r18j5c0ddero4aeu69bahaei8vtj7na3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.628883899097-r18j5c0ddero4aeu69bahaei8vtj7na3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDGbqSmxAXmb6gLoHVDt9rHHWbX8tYAqe0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>628883899097</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>derekhowes.MemoBookToDo</string>
+	<key>PROJECT_ID</key>
+	<string>memotodo-4ee64</string>
+	<key>STORAGE_BUCKET</key>
+	<string>memotodo-4ee64.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:628883899097:ios:2cb5d93c811bab2b9174c8</string>
+</dict>
+</plist>

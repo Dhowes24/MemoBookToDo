@@ -14,7 +14,6 @@ struct SheetHeaderView: View {
     @Binding var date: Date
     var deleteItems: () -> Void
     @Binding var initalLoad: Bool
-    @State private var orientation = UIDeviceOrientation.unknown
     @Binding var showTaskEditor: Bool
     
     var body: some View {
@@ -64,20 +63,14 @@ struct SheetHeaderView: View {
                             .padding(.horizontal, 15)
                             .padding(.bottom, 5)
                             .foregroundColor(colorScheme == .dark ? paperWhite : offBlack)
-                            .offset(x: orientation.isLandscape ? -60 : 0)
                     }
                 }
             }
         }
         .frame(
             width: UIScreen.main.bounds.width,
-            height: orientation.isLandscape ? 220 :
-            UIScreen.main.bounds.height * 0.25)
+            height: UIScreen.main.bounds.height * 0.25)
         .padding(0)
-        .offset(x: orientation.isLandscape ? -20 : 0)
-        .onRotate { newOrientation in
-            orientation = newOrientation
-        }
     }
     
     func todaysName() -> String{

@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct SheetRowView: View {
-    @Environment(\.colorScheme) var colorScheme
-    @State private var orientation = UIDeviceOrientation.unknown
-    
+    @Environment(\.colorScheme) var colorScheme    
     @State private var completed: Bool
     private var date: Date
     @State var delete: Bool = false
@@ -34,7 +32,7 @@ struct SheetRowView: View {
         
         if item?.taskDeadline != nil {
             let formatter = DateFormatter()
-            formatter.dateFormat = "hh a"
+            formatter.dateFormat = "hh:mm a"
             let hourString = formatter.string(from: item!.taskDeadline!)
             self.itemName = "\(hourString): \(item?.name ?? "Error")"
         } else {
@@ -59,17 +57,17 @@ struct SheetRowView: View {
                 if let item = item{
                     Group {
                         ZStack(){
-                            if multiline && !orientation.isLandscape{
+                            if multiline{
                                 SheetRowSeperator()
                             }
                             Group{
                                 HStack(){
                                     BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
-                                        .offset(x:0, y: (multiline && !orientation.isLandscape) ? -20 : 0)
+                                        .offset(x:0, y: multiline ? -20 : 0)
                                     TaskName(grow: grow,
                                              name: itemName,
                                              priorityColor: priorityColor(item),
-                                             multiline: (multiline && !orientation.isLandscape))
+                                             multiline: multiline)
                                     Spacer()
                                 }
                                 .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
@@ -78,9 +76,9 @@ struct SheetRowView: View {
                                                   distances: distances,
                                                   initalLoad: initalLoad,
                                                   number: number)
-                                .offset(x:0, y: (multiline && !orientation.isLandscape) ? -20 : 0)
+                                .offset(x:0, y: multiline ? -20 : 0)
                                 
-                                if multiline && !orientation.isLandscape {
+                                if multiline {
                                     CrossoutShapeView(completed: completed,
                                                       distances: distances,
                                                       initalLoad: initalLoad,
@@ -107,12 +105,9 @@ struct SheetRowView: View {
                 }
             }
             .frame(maxWidth: .infinity,
-               minHeight: (multiline && !orientation.isLandscape) ?  doubleRowHeight : rowHeight,
-               maxHeight: (multiline && !orientation.isLandscape) ?  doubleRowHeight : rowHeight )
+               minHeight: multiline ?  doubleRowHeight : rowHeight,
+               maxHeight: multiline ?  doubleRowHeight : rowHeight )
         .background(paperWhite)
-        .onRotate { newOrientation in
-            orientation = newOrientation
-        }
     }
     
     func priorityColor(_ item: ListItem) -> Color{
