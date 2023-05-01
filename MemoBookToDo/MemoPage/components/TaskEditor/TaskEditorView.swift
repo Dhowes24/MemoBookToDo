@@ -64,7 +64,9 @@ struct TaskEditorView: View {
                 let deadline = taskDeadlingBool ? taskDeadline : nil
                 self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
                 if let deadline = deadline {
-                    scheduleNotification(deadline)
+                    if deadline > Calendar.current.date(byAdding: .minute, value: -10, to: Date.now)! {
+                        scheduleNotification(deadline)
+                    }
                 }
                 withAnimation{
                     showEditor.toggle()
@@ -95,6 +97,7 @@ struct TaskEditorView: View {
         .padding()
         .onChange(of: showEditor) { _ in
             taskName = ""
+            taskDeadline = Calendar.current.startOfDay(for: Date.now)
             taskDeadlingBool = false
             ongoing = false
             selection = "None"
@@ -102,6 +105,14 @@ struct TaskEditorView: View {
     }
     
     func scheduleNotification(_ deadline: Date){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("granted")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
         let hourString = formatter.string(from: deadline)
@@ -110,10 +121,9 @@ struct TaskEditorView: View {
         content.title = "\(hourString)"
         content.subtitle = "\(taskName)"
         content.sound =  UNNotificationSound.default
-        
         let earlyUpdate = Calendar.current.date(byAdding: .minute, value: -10, to: deadline)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: earlyUpdate?.timeIntervalSinceNow ?? deadline.timeIntervalSinceNow, repeats: false)
         
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: earlyUpdate?.timeIntervalSinceNow ?? deadline.timeIntervalSinceNow, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request)

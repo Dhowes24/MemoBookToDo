@@ -123,58 +123,59 @@ struct SheetRowView: View {
         }
     }
     
-    struct SheetRowViewModifier: ViewModifier {
-        @Binding var completed: Bool
-        var date: Date
-        @Binding var delete: Bool
-        @Binding var drag : CGSize
-        @Binding var grow: Bool
-        @Binding var initalLoad: Bool
-        var item: ListItem
-        var number: Double
-        
-        var saveItem: (() -> Void)?
-        var deleteItem: ((ListItem) -> Void)?
-        
-        func body(content: Content) -> some View {
-            content
-                .onAppear(perform: {
-                    withAnimation(Animation.easeInOut(duration: animationDuration).delay(initalLoad ? number * initialLoadDelay : 0)) {
-                        grow = true
-                        completed = item.completed
-                    }
-                })
-                .gesture(
-                    DragGesture()
-                        .onChanged({
-                            if $0.translation.width < 0 {
-                                drag = $0.translation
-                            }
-                        })
-                        .onEnded({ _ in
-                            withAnimation(Animation.linear(duration: 0.3)) {
-                                if drag.width < -60 {
-                                    delete.toggle()
-                                    if let deleteItem = deleteItem {
-                                        deleteItem(item)
-                                    }
-                                }
-                                drag = .zero
-                            }
-                        })
-                )
-                .onTapGesture(perform: {
-                    initalLoad = false
-                    withAnimation(Animation.easeInOut(duration: animationDuration)) {
-                        item.completed.toggle()
-                        completed.toggle()
-                        if item.onGoing {
-                            item.dateCompleted = completed ? date : nil
+}
+
+struct SheetRowViewModifier: ViewModifier {
+    @Binding var completed: Bool
+    var date: Date
+    @Binding var delete: Bool
+    @Binding var drag : CGSize
+    @Binding var grow: Bool
+    @Binding var initalLoad: Bool
+    var item: ListItem
+    var number: Double
+    
+    var saveItem: (() -> Void)?
+    var deleteItem: ((ListItem) -> Void)?
+    
+    func body(content: Content) -> some View {
+        content
+            .onAppear(perform: {
+                withAnimation(Animation.easeInOut(duration: animationDuration).delay(initalLoad ? number * initialLoadDelay : 0)) {
+                    grow = true
+                    completed = item.completed
+                }
+            })
+            .gesture(
+                DragGesture()
+                    .onChanged({
+                        if $0.translation.width < 0 {
+                            drag = $0.translation
                         }
-                        saveItem!()
+                    })
+                    .onEnded({ _ in
+                        withAnimation(Animation.linear(duration: 0.3)) {
+                            if drag.width < -60 {
+                                delete.toggle()
+                                if let deleteItem = deleteItem {
+                                    deleteItem(item)
+                                }
+                            }
+                            drag = .zero
+                        }
+                    })
+            )
+            .onTapGesture(perform: {
+                initalLoad = false
+                withAnimation(Animation.easeInOut(duration: animationDuration)) {
+                    item.completed.toggle()
+                    completed.toggle()
+                    if item.onGoing {
+                        item.dateCompleted = completed ? date : nil
                     }
-                })
-        }
+                    saveItem!()
+                }
+            })
     }
 }
 
