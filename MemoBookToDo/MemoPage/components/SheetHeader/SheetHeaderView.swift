@@ -70,7 +70,7 @@ struct SheetHeaderView: View {
         .frame(
             width: UIScreen.main.bounds.width,
             height: UIScreen.main.bounds.height * 0.25)
-        .padding(0)
+        .padding(.bottom, 10)
     }
     
     func todaysName() -> String{

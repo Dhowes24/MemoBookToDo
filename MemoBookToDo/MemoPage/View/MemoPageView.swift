@@ -52,7 +52,6 @@ struct MemoPageView: View {
                             }
                         }
                     }
-                    .offset(y:-10)
                 }
             }
             .backgroundColor(colorScheme == .dark ? offBlack : paperWhite)
@@ -77,6 +76,15 @@ struct MemoPageView: View {
         .onChange(of: vm.date) { _ in
             withAnimation {
                 vm.newLoad()
+            }
+        }
+        .onAppear {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    print("granted")
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
             }
         }
     }
