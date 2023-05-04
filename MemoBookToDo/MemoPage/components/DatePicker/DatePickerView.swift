@@ -12,7 +12,9 @@ struct DatePickerView: View {
 
     var body: some View {
         VStack{
-            DatePicker("", selection: $date, displayedComponents: .date)
+            DatePicker("", selection: $date,
+                       in: twoMonthsAgo ... twoMonthsAway,
+                       displayedComponents: .date)
                 .datePickerStyle(.graphical)
         }
         .frame(width: UIScreen.mainWidth-60)

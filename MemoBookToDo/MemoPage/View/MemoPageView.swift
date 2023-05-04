@@ -8,7 +8,6 @@ import SwiftUI
 import UserNotifications
 
 struct MemoPageView: View {
-    @Environment(\.colorScheme) var colorScheme
     @StateObject private var vm = MemoPageViewModel()
     
     init() {
@@ -54,7 +53,7 @@ struct MemoPageView: View {
                     }
                 }
             }
-            .backgroundColor(colorScheme == .dark ? offBlack : paperWhite)
+            .backgroundColor(paperWhite)
             .ignoresSafeArea()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             ZStack(alignment: .center){
@@ -81,11 +80,12 @@ struct MemoPageView: View {
         .onAppear {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                 if success {
-                    print("granted")
+//
                 } else if let error = error {
                     print(error.localizedDescription)
                 }
             }
+            vm.cleanUpCoreData()
         }
     }
 }

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SheetHeaderView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     @Binding var chooseDate: Bool
     @Binding var date: Date
     var deleteItems: () -> Void
@@ -38,15 +36,18 @@ struct SheetHeaderView: View {
                             .resizable()
                             .frame(width: 35, height: 35)
                             .padding(.horizontal, 15)
-                            .foregroundColor(colorScheme == .dark ? paperWhite : offBlack)
+                            .foregroundColor(offBlack)
                     }
                     Spacer()
                 }
                 
-                Text(todaysName())
-                    .font(.system(size: 36))
-                Text(date, style: .date)
-                    .font(.system(size: 14))
+                Group {
+                    Text(todaysName())
+                        .font(.system(size: 36))
+                    Text(date, style: .date)
+                        .font(.system(size: 14))
+                }
+                .foregroundColor(offBlack)
                 
                 HStack {
                     Spacer()
@@ -62,7 +63,7 @@ struct SheetHeaderView: View {
                             .frame(width: 18, height: 18)
                             .padding(.horizontal, 15)
                             .padding(.bottom, 5)
-                            .foregroundColor(colorScheme == .dark ? paperWhite : offBlack)
+                            .foregroundColor(offBlack)
                     }
                 }
             }

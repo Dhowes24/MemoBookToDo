@@ -30,3 +30,8 @@ let doubleRowHeight: CGFloat = 82
 let rowHeight: CGFloat = 40
 let taskNameFontSize: CGFloat = 20
 let taskWidthAvaliable: CGFloat = UIScreen.mainWidth - 75
+
+//Dates
+//_______________________________________________________
+var twoMonthsAgo: Date = (Calendar.current.date(byAdding: .month, value: -2, to: Date()) ?? Date.distantPast)
+var twoMonthsAway: Date = (Calendar.current.date(byAdding: .month, value: 2, to: Date()) ?? Date.distantFuture)

@@ -37,6 +37,21 @@ extension MemoPageView {
             saveData()
         }
         
+        func cleanUpCoreData() {
+            let request = NSFetchRequest<ListItem>(entityName: "ListItem")
+            
+            do {
+                let itemsToDelete = try container.viewContext.fetch(request).filter{ $0.dateCreated ?? Date.now < twoMonthsAgo }
+                for item in itemsToDelete {
+                    if (item.onGoing && item.dateCompleted ?? Date.now < twoMonthsAgo) || !item.onGoing {
+                        deleteItem(item)
+                    }
+                }
+            } catch let error {
+                print("Error fetching. \(error)")
+            }
+        }
+        
         func deleteItem(_ item: ListItem) {
             withAnimation(Animation.easeInOut(duration: 0.5)) {
                 

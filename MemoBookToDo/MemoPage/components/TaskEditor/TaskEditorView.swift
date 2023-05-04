@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TaskEditorView: View {
     var addItem: (String, Bool, Int16, Date?) -> Void
+    @FocusState var textIsFocused: Bool
     @State private var ongoing: Bool = false
     let priorities = ["None", "Low", "Medium", "High"]
     let regularText: CGFloat = 14
@@ -31,6 +32,7 @@ struct TaskEditorView: View {
                 .backgroundColor(paperWhite)
                 .cornerRadius(5)
                 .padding(10)
+                .focused($textIsFocused)
             
             HStack {
                 Text("Priority:")
@@ -101,6 +103,7 @@ struct TaskEditorView: View {
             taskDeadlingBool = false
             ongoing = false
             selection = "None"
+            textIsFocused = showEditor
         }
     }
     
