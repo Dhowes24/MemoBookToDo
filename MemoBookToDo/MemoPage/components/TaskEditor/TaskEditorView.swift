@@ -20,7 +20,7 @@ struct TaskEditorView: View {
     @State var taskDeadlingBool: Bool = false
 
     var body: some View {
-        VStack {
+        ScrollView {
             Text("Add Task")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(.black)

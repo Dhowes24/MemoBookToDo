@@ -12,6 +12,8 @@ struct SheetHeaderView: View {
     @Binding var date: Date
     var deleteItems: () -> Void
     @Binding var initalLoad: Bool
+    @State private var offset: CGSize = CGSize.zero
+    @State private var offsetAnimation: CGFloat = 0
     @Binding var showTaskEditor: Bool
     
     var body: some View {
@@ -48,6 +50,7 @@ struct SheetHeaderView: View {
                         .font(.system(size: 14))
                 }
                 .foregroundColor(offBlack)
+                .offset( x:offsetAnimation, y:0)
                 
                 HStack {
                     Spacer()
@@ -72,7 +75,32 @@ struct SheetHeaderView: View {
             width: UIScreen.main.bounds.width,
             height: UIScreen.main.bounds.height * 0.25)
         .padding(.bottom, 10)
+        .background(paperWhite)
+        .gesture(
+            DragGesture().onChanged(
+                { gesture in
+                    offset = gesture.translation
+                }
+            )
+            .onEnded({ _ in
+                if abs(offset.width) > 150 {
+                    var dayChange = DateComponents()
+                    dayChange.day =  offset.width > 0 ? -1 : 1
+                    date = Calendar.current.date(
+                        byAdding: dayChange,
+                        to: date) ?? date
+                    withAnimation(Animation.linear(duration: 0.8)) {
+                        offsetAnimation = (offset.width > 0 ? 1 : -1) * UIScreen.mainWidth
+                    }
+                }
+                withAnimation {
+                    offsetAnimation = 0
+                    offset = .zero
+                }
+            })
+        )
     }
+    
     
     func todaysName() -> String{
         let f = DateFormatter()
