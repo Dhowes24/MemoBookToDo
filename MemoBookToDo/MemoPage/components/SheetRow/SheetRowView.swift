@@ -213,17 +213,15 @@ struct SheetRowViewModifier: ViewModifier {
                                 item.dateCompleted = completed ? date : nil
                             }
                             saveItem!()
-                            
-                            
                         }
                     }
             )
-            .onChange(of: itemName) { _ in
-                let nameWidth: CGFloat = itemName.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width
+            .onChange(of: itemName) { newName in
+                let nameWidth: CGFloat = newName.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width
                 if nameWidth > taskWidthAvaliable {
-                    multiline = false
-                } else {
                     multiline = true
+                } else {
+                    multiline = false
                 }
             }
     }

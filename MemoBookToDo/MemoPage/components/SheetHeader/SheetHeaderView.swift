@@ -50,6 +50,7 @@ struct SheetHeaderView: View {
                 }
                 .foregroundColor(offBlack)
                 .offset( x:offsetAnimation, y:0)
+                .offset( x:offset.width / 4 , y:0)
                 
                 HStack {
                     Spacer()
