@@ -76,11 +76,6 @@ struct TaskEditorView: View {
                     self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
                 }
                 
-                if let deadline = deadline {
-                    if deadline > Calendar.current.date(byAdding: .minute, value: -10, to: Date.now)! {
-                        scheduleNotification(deadline)
-                    }
-                }
                 withAnimation{
                     updating = false
                     showEditor.toggle()
@@ -128,23 +123,6 @@ struct TaskEditorView: View {
                 updating = false
             }
         }
-    }
-    
-    func scheduleNotification(_ deadline: Date){
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm a"
-        let hourString = formatter.string(from: deadline)
-        
-        let content = UNMutableNotificationContent()
-        content.title = "\(hourString)"
-        content.subtitle = "\(taskName)"
-        content.sound =  UNNotificationSound.default
-        let earlyUpdate = Calendar.current.date(byAdding: .minute, value: -10, to: deadline)
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: earlyUpdate?.timeIntervalSinceNow ?? deadline.timeIntervalSinceNow, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request)
     }
 }
 

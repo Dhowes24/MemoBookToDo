@@ -23,7 +23,6 @@ struct MemoPageView: View {
                     SheetHeaderView(
                         chooseDate: $vm.chooseDate,
                         date: $vm.date,
-                        deleteItems: {vm.resetCoreData()},
                         initalLoad: $vm.initalLoad,
                         showTaskEditor: $vm.showTaskEditor)
                     

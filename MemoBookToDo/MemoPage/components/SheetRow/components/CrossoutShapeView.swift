@@ -46,11 +46,6 @@ struct CrossoutShapeView: View{
                     style: StrokeStyle(lineWidth: 5, lineCap: .round)
                 )
                 .frame(height: 25)
-                .transaction { transaction in
-                    transaction.animation = Animation.easeInOut(duration: animationDuration).delay(
-                        ((initalLoad ? number * initialLoadDelay + initialLoadDelay : 0) + (multi ? initialLoadDelay : 0))
-                    )
-                }
         }
     }
 }

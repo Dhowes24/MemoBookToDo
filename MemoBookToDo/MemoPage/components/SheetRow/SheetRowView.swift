@@ -107,6 +107,7 @@ struct SheetRowView: View {
                             TrashLabel(dragAmount: dragAmount, multiline: multiline)
                         }
                     }
+                    .background(paperWhite)
                     .opacity(pressing ? 0.5 : 1)
                     .simultaneousGesture(
                         LongPressGesture(minimumDuration: 0.5)
@@ -131,6 +132,8 @@ struct SheetRowView: View {
                         grow: $grow,
                         initalLoad: $initalLoad,
                         item: item,
+                        itemName: itemName,
+                        multiline: $multiline,
                         number: number,
                         saveItem: saveItem,
                         deleteItem: deleteItem))
@@ -165,6 +168,8 @@ struct SheetRowViewModifier: ViewModifier {
     @Binding var grow: Bool
     @Binding var initalLoad: Bool
     var item: ListItem
+    var itemName: String
+    @Binding var multiline: Bool
     var number: Double
     
     var saveItem: (() -> Void)?
@@ -208,9 +213,19 @@ struct SheetRowViewModifier: ViewModifier {
                                 item.dateCompleted = completed ? date : nil
                             }
                             saveItem!()
+                            
+                            
                         }
                     }
             )
+            .onChange(of: itemName) { _ in
+                let nameWidth: CGFloat = itemName.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width
+                if nameWidth > taskWidthAvaliable {
+                    multiline = false
+                } else {
+                    multiline = true
+                }
+            }
     }
 }
 

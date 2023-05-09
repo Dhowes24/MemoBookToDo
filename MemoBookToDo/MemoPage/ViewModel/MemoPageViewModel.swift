@@ -36,6 +36,7 @@ extension MemoPageView {
             item.taskDeadline = deadline
             item.uuid = UUID()
 
+            setLocalNotification(deadline: deadline, taskName: name)
             saveData()
         }
         
@@ -62,6 +63,7 @@ extension MemoPageView {
                 }
             }
             container.viewContext.delete(item)
+            resetLocalNotifications()
             saveData()
         }
         
@@ -80,11 +82,28 @@ extension MemoPageView {
             }
         }
         
-        func resetCoreData() {
-            for item in items  {
-                container.viewContext.delete(item)
+        func resetLocalNotifications() {
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+
+            let request = NSFetchRequest<ListItem>(entityName: "ListItem")
+            
+            do {
+                var notifcations = try container.viewContext.fetch(request)
+                
+                for notification in notifcations {
+                    if let deadline = notification.taskDeadline {
+                        setLocalNotification(deadline: deadline, taskName: notification.name ?? "Task")
+                    }
+                }
+            } catch let error {
+                print("Error fetching. \(error)")
             }
-            saveData()
+        }
+        
+        func newLoad() {
+            chooseDate = false
+            initalLoad = true
+            fetchItems()
         }
         
         func saveData() {
@@ -103,13 +122,29 @@ extension MemoPageView {
             item.priority = priority
             item.taskDeadline = deadline
             
+            resetLocalNotifications()
             saveData()
         }
         
-        func newLoad() {
-            chooseDate = false
-            initalLoad = true
-            fetchItems()
+        func setLocalNotification(deadline: Date?, taskName: String) {
+            if let deadline = deadline {
+                if deadline > Calendar.current.date(byAdding: .minute, value: -10, to: Date.now)! {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "hh:mm a"
+                    let hourString = formatter.string(from: deadline)
+                    
+                    let content = UNMutableNotificationContent()
+                    content.title = "\(hourString)"
+                    content.subtitle = "\(taskName)"
+                    content.sound =  UNNotificationSound.default
+                    let earlyUpdate = Calendar.current.date(byAdding: .minute, value: -10, to: deadline)
+                    
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: earlyUpdate?.timeIntervalSinceNow ?? deadline.timeIntervalSinceNow, repeats: false)
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                    
+                    UNUserNotificationCenter.current().add(request)
+                }
+            }
         }
     }
 }

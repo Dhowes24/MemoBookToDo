@@ -10,7 +10,6 @@ import SwiftUI
 struct SheetHeaderView: View {
     @Binding var chooseDate: Bool
     @Binding var date: Date
-    var deleteItems: () -> Void
     @Binding var initalLoad: Bool
     @State private var offset: CGSize = CGSize.zero
     @State private var offsetAnimation: CGFloat = 0
@@ -121,11 +120,9 @@ struct SheetHeaderView: View {
 
 struct SheetHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        SheetHeaderView  (chooseDate: .constant(false), date: .constant(Date.now),
-            deleteItems: {
-            //
-        }, initalLoad: .constant(true),
-                          
+        SheetHeaderView  (chooseDate: .constant(false),
+                          date: .constant(Date.now),
+                          initalLoad: .constant(true),
                           showTaskEditor: .constant(false))
     }
 }
