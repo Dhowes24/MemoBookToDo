@@ -20,11 +20,24 @@ struct SheetRowView: View {
     @Binding var initalLoad: Bool
     @State var multiline: Bool
     var number: Double = 0
+    @GestureState private var pressing = false
+    @Binding var updatingTaskBool: Bool
+    @Binding var updatingTaskItem: ListItem?
+    @Binding var showTaskEditor: Bool
 
     var saveItem: (() -> Void)?
     var deleteItem: ((ListItem) -> Void)?
     
-    init(date: Date = Date.now ,item: ListItem? = nil, initalLoad: Binding<Bool>, number: Double = 0, saveItem: ( () -> Void)? = nil, deleteItem: ( (ListItem) -> Void)? = nil) {
+    init(date: Date = Date.now,
+         item: ListItem? = nil,
+         initalLoad: Binding<Bool>,
+         number: Double = 0,
+         saveItem: ( () -> Void)? = nil,
+         deleteItem: ( (ListItem) -> Void)? = nil,
+         updatingTaskBool: Binding<Bool>,
+         updatingTaskItem: Binding<ListItem?>,
+         showTaskEditor: Binding<Bool>) {
+        
         _completed = State(initialValue: false)
         self.date = date
         self.distances = item?.name?.asciiValues ?? [8,8,8,8]
@@ -46,6 +59,10 @@ struct SheetRowView: View {
         } else {
             _multiline = State(initialValue: false)
         }
+        
+        _updatingTaskBool = updatingTaskBool
+        _updatingTaskItem = updatingTaskItem
+        _showTaskEditor = showTaskEditor
         
         self.number = number
         self.saveItem = saveItem
@@ -71,7 +88,6 @@ struct SheetRowView: View {
                                     Spacer()
                                 }
                                 .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
-
                                 CrossoutShapeView(completed: completed,
                                                   distances: distances,
                                                   initalLoad: initalLoad,
@@ -91,6 +107,22 @@ struct SheetRowView: View {
                             TrashLabel(dragAmount: dragAmount, multiline: multiline)
                         }
                     }
+                    .opacity(pressing ? 0.5 : 1)
+                    .simultaneousGesture(
+                        LongPressGesture(minimumDuration: 0.5)
+                            .updating($pressing, body: { val, state, transaction in
+                                state = val
+                            })
+                            .onEnded(
+                                { _ in
+                                    withAnimation {
+                                        updatingTaskBool = true
+                                        updatingTaskItem = item
+                                        showTaskEditor = true
+                                    }
+                                }
+                            )
+                    )
                     .modifier(SheetRowViewModifier(
                         completed: $completed,
                         date: date,
@@ -105,9 +137,9 @@ struct SheetRowView: View {
                 }
             }
             .frame(maxWidth: .infinity,
-               minHeight: multiline ?  doubleRowHeight : rowHeight,
-               maxHeight: multiline ?  doubleRowHeight : rowHeight )
-        .background(paperWhite)
+                   minHeight: multiline ?  doubleRowHeight : rowHeight,
+                   maxHeight: multiline ?  doubleRowHeight : rowHeight )
+            .background(paperWhite)
     }
     
     func priorityColor(_ item: ListItem) -> Color{
@@ -165,17 +197,20 @@ struct SheetRowViewModifier: ViewModifier {
                         }
                     })
             )
-            .onTapGesture(perform: {
-                initalLoad = false
-                withAnimation(Animation.easeInOut(duration: animationDuration)) {
-                    item.completed.toggle()
-                    completed.toggle()
-                    if item.onGoing {
-                        item.dateCompleted = completed ? date : nil
+            .simultaneousGesture(
+                TapGesture()
+                    .onEnded { _ in
+                        initalLoad = false
+                        withAnimation(Animation.easeInOut(duration: animationDuration)) {
+                            item.completed.toggle()
+                            completed.toggle()
+                            if item.onGoing {
+                                item.dateCompleted = completed ? date : nil
+                            }
+                            saveItem!()
+                        }
                     }
-                    saveItem!()
-                }
-            })
+            )
     }
 }
 
@@ -184,7 +219,7 @@ struct SheetRowView_Previews: PreviewProvider {
         let previewDataController = PreviewDataController()
         let item = previewDataController.savePreviewData()
         
-        return SheetRowView(item: item, initalLoad: .constant(false))
+        return SheetRowView(item: item, initalLoad: .constant(false), updatingTaskBool: .constant(false), updatingTaskItem: .constant(nil), showTaskEditor: .constant(false))
             .environment(
                 \.managedObjectContext,
                  previewDataController.viewContext

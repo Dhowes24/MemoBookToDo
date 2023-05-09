@@ -31,8 +31,13 @@ struct MemoPageView: View {
                         VStack(spacing: 0){
                             ForEach(0..<numOfRows, id: \.self) { item in
                                 SheetRowSeperator()
-                                
-                                SheetRowView(initalLoad: .constant(false))
+
+                                SheetRowView(
+                                    initalLoad: .constant(false),
+                                    updatingTaskBool: .constant(false),
+                                    updatingTaskItem: .constant(nil),
+                                    showTaskEditor: .constant(false))
+
                             }
                             SheetRowSeperator()
                         }
@@ -47,7 +52,10 @@ struct MemoPageView: View {
                                     initalLoad: $vm.initalLoad,
                                     number: Double(vm.items.firstIndex(of: item) ?? 0),
                                     saveItem: {vm.saveData()},
-                                    deleteItem: {_ in vm.deleteItem(item) })
+                                    deleteItem: {_ in vm.deleteItem(item) },
+                                    updatingTaskBool: $vm.updatingTaskBool,
+                                    updatingTaskItem: $vm.itemToUpdate,
+                                    showTaskEditor: $vm.showTaskEditor)
                             }
                         }
                     }
@@ -67,7 +75,7 @@ struct MemoPageView: View {
                     }
                 DatePickerView(date: $vm.date)
                     .offset(x: vm.chooseDate ? 0: -UIScreen.mainWidth)
-                TaskEditorView(addItem: vm.addItem, showEditor: $vm.showTaskEditor)
+                TaskEditorView(addItem: vm.addItem, showEditor: $vm.showTaskEditor, updating: $vm.updatingTaskBool, itemToUpdate: $vm.itemToUpdate, updateItem: vm.updateItem)
                     .offset(x: vm.showTaskEditor ? 0: UIScreen.mainWidth)
             }
             .opacity(vm.showTaskEditor || vm.chooseDate  ? 1 : 0)

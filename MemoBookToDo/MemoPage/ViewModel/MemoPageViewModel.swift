@@ -18,6 +18,8 @@ extension MemoPageView {
         @Published var initalLoad: Bool = true
         @Published var items: [ListItem] = []
         @Published var showTaskEditor: Bool = false
+        @Published var updatingTaskBool: Bool = false
+        @Published var itemToUpdate: ListItem?
         
         init() {
             container = DataController().container
@@ -92,6 +94,16 @@ extension MemoPageView {
             } catch let error {
                 print("Error Saving. \(error)")
             }
+        }
+        
+        func updateItem(_ item: ListItem, name: String, ongoing: Bool,  priority: Int16, deadline: Date?) {
+            item.completed = false
+            item.name = name
+            item.onGoing = ongoing
+            item.priority = priority
+            item.taskDeadline = deadline
+            
+            saveData()
         }
         
         func newLoad() {

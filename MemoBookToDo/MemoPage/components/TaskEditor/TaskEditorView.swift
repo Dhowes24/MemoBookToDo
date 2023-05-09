@@ -10,18 +10,21 @@ import SwiftUI
 struct TaskEditorView: View {
     var addItem: (String, Bool, Int16, Date?) -> Void
     @FocusState var textIsFocused: Bool
-    @State private var ongoing: Bool = false
+    @State var ongoing: Bool = false
     let priorities = ["None", "Low", "Medium", "High"]
     let regularText: CGFloat = 14
-    @State private var selection = "None"
+    @State var selection = "None"
     @Binding var showEditor: Bool
     @State var taskName: String = ""
     @State var taskDeadline: Date = Calendar.current.startOfDay(for: Date.now)
     @State var taskDeadlingBool: Bool = false
-
+    @Binding var updating: Bool
+    @Binding var itemToUpdate: ListItem?
+    var updateItem: (ListItem, String, Bool, Int16, Date?) -> Void
+    
     var body: some View {
         ScrollView {
-            Text("Add Task")
+            Text(updating ? "Update Task" : "Add Task")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(.black)
             
@@ -64,17 +67,26 @@ struct TaskEditorView: View {
             
             Button {
                 let deadline = taskDeadlingBool ? taskDeadline : nil
-                self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
+                
+                if updating {
+                    if let itemToUpdate = itemToUpdate {
+                        self.updateItem(itemToUpdate, taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
+                    }
+                } else {
+                    self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
+                }
+                
                 if let deadline = deadline {
                     if deadline > Calendar.current.date(byAdding: .minute, value: -10, to: Date.now)! {
                         scheduleNotification(deadline)
                     }
                 }
                 withAnimation{
+                    updating = false
                     showEditor.toggle()
                 }
             } label: {
-                Text("Save Task")
+                Text(updating ? "Update Task" : "Save Task")
                     .font(.system(size: regularText, weight: .semibold))
                     .padding(.vertical, 5)
                     .padding(.horizontal, capsuleHorizontalPadding)
@@ -98,12 +110,23 @@ struct TaskEditorView: View {
         )
         .padding()
         .onChange(of: showEditor) { _ in
-            taskName = ""
-            taskDeadline = Calendar.current.startOfDay(for: Date.now)
-            taskDeadlingBool = false
-            ongoing = false
-            selection = "None"
-            textIsFocused = showEditor
+            if showEditor && updating {
+                taskName = itemToUpdate?.name ?? "No Name"
+                taskDeadline = itemToUpdate?.taskDeadline ?? Calendar.current.startOfDay(for: Date.now)
+                taskDeadlingBool = itemToUpdate?.taskDeadline != nil
+                ongoing = itemToUpdate?.onGoing ?? false
+                selection = priorities[Int(itemToUpdate?.priority ?? 0)]
+                
+            } else {
+                taskName = ""
+                taskDeadline = Calendar.current.startOfDay(for: Date.now)
+                taskDeadlingBool = false
+                ongoing = false
+                selection = "None"
+                textIsFocused = showEditor
+                itemToUpdate = nil
+                updating = false
+            }
         }
     }
     
@@ -129,6 +152,8 @@ struct TaskEditorView_Previews: PreviewProvider {
     static var previews: some View {
         TaskEditorView(addItem: { _,_,_,_ in
             print("Nothing")
-        }, showEditor: .constant(true))
+        }, showEditor: .constant(true), updating: .constant(false), itemToUpdate: .constant(nil)) { _, _, _, _, _ in
+            print("Nothing Again")
+        }
     }
 }

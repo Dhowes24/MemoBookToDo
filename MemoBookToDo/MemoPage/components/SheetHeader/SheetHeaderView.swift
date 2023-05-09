@@ -89,7 +89,7 @@ struct SheetHeaderView: View {
                     date = Calendar.current.date(
                         byAdding: dayChange,
                         to: date) ?? date
-                    withAnimation(Animation.linear(duration: 0.8)) {
+                    withAnimation(Animation.linear) {
                         offsetAnimation = (offset.width > 0 ? 1 : -1) * UIScreen.mainWidth
                     }
                 }
