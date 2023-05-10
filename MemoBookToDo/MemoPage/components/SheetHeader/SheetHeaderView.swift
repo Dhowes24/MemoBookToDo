@@ -83,7 +83,7 @@ struct SheetHeaderView: View {
                 }
             )
             .onEnded({ _ in
-                if abs(offset.width) > 150 {
+                if abs(offset.width) > 75 {
                     var dayChange = DateComponents()
                     dayChange.day =  offset.width > 0 ? -1 : 1
                     date = Calendar.current.date(
