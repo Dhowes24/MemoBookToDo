@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TaskEditorView: View {
     var addItem: (String, Bool, Int16, Date?) -> Void
-    @FocusState var textIsFocused: Bool
     @State var ongoing: Bool = false
     let priorities = ["None", "Low", "Medium", "High"]
     let regularText: CGFloat = 14
@@ -18,6 +17,7 @@ struct TaskEditorView: View {
     @State var taskName: String = ""
     @State var taskDeadline: Date = Calendar.current.startOfDay(for: Date.now)
     @State var taskDeadlingBool: Bool = false
+    @FocusState var textIsFocused: Bool
     @Binding var updating: Bool
     @Binding var itemToUpdate: ListItem?
     var updateItem: (ListItem, String, Bool, Int16, Date?) -> Void
@@ -96,7 +96,7 @@ struct TaskEditorView: View {
             .disabled(taskName.isEmpty)
 
         }
-        .frame(width: UIScreen.mainWidth-60)
+        .frame(minWidth: UIScreen.mainWidth-60, maxHeight: UIScreen.halfMainHeight)
         .padding()
         .background(
         RoundedRectangle(cornerSize: CGSize(25))
