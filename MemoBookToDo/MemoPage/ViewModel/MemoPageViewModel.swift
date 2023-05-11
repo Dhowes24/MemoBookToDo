@@ -84,16 +84,11 @@ extension MemoPageView {
         
         func resetLocalNotifications() {
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-
             let request = NSFetchRequest<ListItem>(entityName: "ListItem")
-            
             do {
-                var notifcations = try container.viewContext.fetch(request)
-                
+                let notifcations = try container.viewContext.fetch(request)
                 for notification in notifcations {
-                    if let deadline = notification.taskDeadline {
-                        setLocalNotification(deadline: deadline, taskName: notification.name ?? "Task")
-                    }
+                        setLocalNotification(deadline: notification.taskDeadline, taskName: notification.name ?? "Task")
                 }
             } catch let error {
                 print("Error fetching. \(error)")
@@ -128,7 +123,7 @@ extension MemoPageView {
         
         func setLocalNotification(deadline: Date?, taskName: String) {
             if let deadline = deadline {
-                if deadline > Calendar.current.date(byAdding: .minute, value: -10, to: Date.now)! {
+                if Calendar.current.date(byAdding: .minute, value: -10, to: deadline)! > Date.now {
                     let formatter = DateFormatter()
                     formatter.dateFormat = "hh:mm a"
                     let hourString = formatter.string(from: deadline)

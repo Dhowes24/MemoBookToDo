@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TaskEditorView: View {
     var addItem: (String, Bool, Int16, Date?) -> Void
+    var date: Date
     @State var ongoing: Bool = false
     let priorities = ["None", "Low", "Medium", "High"]
     let regularText: CGFloat = 14
@@ -36,6 +37,9 @@ struct TaskEditorView: View {
                 .cornerRadius(5)
                 .padding(10)
                 .focused($textIsFocused)
+                .onTapGesture {
+                    textIsFocused = true
+                }
             
             HStack {
                 Text("Priority:")
@@ -107,20 +111,22 @@ struct TaskEditorView: View {
         .onChange(of: showEditor) { _ in
             if showEditor && updating {
                 taskName = itemToUpdate?.name ?? "No Name"
-                taskDeadline = itemToUpdate?.taskDeadline ?? Calendar.current.startOfDay(for: Date.now)
+                taskDeadline = itemToUpdate?.taskDeadline ?? Calendar.current.startOfDay(for: date)
                 taskDeadlingBool = itemToUpdate?.taskDeadline != nil
                 ongoing = itemToUpdate?.onGoing ?? false
                 selection = priorities[Int(itemToUpdate?.priority ?? 0)]
                 
             } else {
-                taskName = ""
-                taskDeadline = Calendar.current.startOfDay(for: Date.now)
-                taskDeadlingBool = false
-                ongoing = false
-                selection = "None"
-                textIsFocused = showEditor
-                itemToUpdate = nil
-                updating = false
+                let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
+                    taskName = ""
+                    taskDeadline = Calendar.current.startOfDay(for: date)
+                    taskDeadlingBool = false
+                    ongoing = false
+                    selection = "None"
+                    textIsFocused = false
+                    itemToUpdate = nil
+                    updating = false
+                }
             }
         }
     }
@@ -130,7 +136,7 @@ struct TaskEditorView_Previews: PreviewProvider {
     static var previews: some View {
         TaskEditorView(addItem: { _,_,_,_ in
             print("Nothing")
-        }, showEditor: .constant(true), updating: .constant(false), itemToUpdate: .constant(nil)) { _, _, _, _, _ in
+        }, date: Date.now, showEditor: .constant(true), updating: .constant(false), itemToUpdate: .constant(nil)) { _, _, _, _, _ in
             print("Nothing Again")
         }
     }

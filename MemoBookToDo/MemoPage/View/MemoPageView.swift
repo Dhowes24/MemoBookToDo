@@ -74,7 +74,13 @@ struct MemoPageView: View {
                     }
                 DatePickerView(date: $vm.date)
                     .offset(x: vm.chooseDate ? 0: -UIScreen.mainWidth)
-                TaskEditorView(addItem: vm.addItem, showEditor: $vm.showTaskEditor, updating: $vm.updatingTaskBool, itemToUpdate: $vm.itemToUpdate, updateItem: vm.updateItem)
+                TaskEditorView(
+                    addItem: vm.addItem,
+                    date: vm.date,
+                    showEditor: $vm.showTaskEditor,
+                    updating: $vm.updatingTaskBool,
+                    itemToUpdate: $vm.itemToUpdate,
+                    updateItem: vm.updateItem)
                     .offset(x: vm.showTaskEditor ? 0: UIScreen.mainWidth)
             }
             .opacity(vm.showTaskEditor || vm.chooseDate  ? 1 : 0)
