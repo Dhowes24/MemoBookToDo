@@ -20,9 +20,8 @@ https://apps.apple.com/us/app/memobook-todo-list/id6448571980
   
  </div>
   
- <video width="320" height="240" controls>
-  <source src="[movie.mp4](https://github.com/Dhowes24/MemoBookToDo/assets/33637595/aa6fae7b-9fc6-42f8-926f-234b7b51703e)" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
   
+https://github.com/Dhowes24/MemoBookToDo/assets/33637595/263c1188-f990-438c-835b-ef697c5978c0
+
+
  </div>
