@@ -20,8 +20,6 @@ https://apps.apple.com/us/app/memobook-todo-list/id6448571980
   
  </div>
   
-  
-https://github.com/Dhowes24/MemoBookToDo/assets/33637595/263c1188-f990-438c-835b-ef697c5978c0
-
+https://github.com/Dhowes24/MemoBookToDo/assets/33637595/46f13756-e69e-479c-a3a1-fcdedd58c616
 
  </div>
