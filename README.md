@@ -7,3 +7,22 @@ This application leverages the Core Data framework as a lightweight persistent d
 
 ## Available on App Store for IPhone and IPad
 https://apps.apple.com/us/app/memobook-todo-list/id6448571980
+
+## Media
+
+<div style="display:flex; flex-direction: column; justify-content: center; align-items: center">
+
+<div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+
+<img src="https://github.com/Dhowes24/MemoBookToDo/assets/33637595/d1500bf6-e58c-4eb8-b142-debbf779c181" width="300">
+<img src="https://github.com/Dhowes24/MemoBookToDo/assets/33637595/43f56f07-79fe-411a-ada0-2296fb407e55" width="300">
+<img src="https://github.com/Dhowes24/MemoBookToDo/assets/33637595/a4342d18-0939-46aa-a817-984d4581083d" width="300">
+  
+ </div>
+  
+ <video width="320" height="240" controls>
+  <source src="[movie.mp4](https://github.com/Dhowes24/MemoBookToDo/assets/33637595/aa6fae7b-9fc6-42f8-926f-234b7b51703e)" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+  
+ </div>
