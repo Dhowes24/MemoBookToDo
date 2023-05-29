@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SheetHeaderView: View {
+    @Environment(\.scenePhase) var scenePhase
+    
     @Binding var chooseDate: Bool
     @Binding var date: Date
     @Binding var initalLoad: Bool
@@ -73,7 +75,7 @@ struct SheetHeaderView: View {
         }
         .frame(
             width: UIScreen.main.bounds.width,
-            height: UIScreen.main.bounds.height * 0.25)
+            height: 230)
         .padding(.bottom, 10)
         .background(paperWhite)
         .gesture(
@@ -99,6 +101,11 @@ struct SheetHeaderView: View {
                 }
             })
         )
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                date = Date.now
+            }
+        }
     }
     
     

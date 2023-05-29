@@ -29,7 +29,7 @@ let capsuleHorizontalPadding: CGFloat = 10
 let doubleRowHeight: CGFloat = 82
 let rowHeight: CGFloat = 40
 let taskNameFontSize: CGFloat = 20
-let taskWidthAvaliable: CGFloat = UIScreen.mainWidth - 55
+let taskWidthAvaliable: CGFloat = UIScreen.mainWidth - 80
 
 //Dates
 //_______________________________________________________

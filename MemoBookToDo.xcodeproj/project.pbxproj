@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B02A21F2A25033E000BA43A /* MemoBookToDo_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B02A21E2A25033E000BA43A /* MemoBookToDo_Tests.swift */; };
 		6B30882129F040CD008E29F6 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B30882029F040CD008E29F6 /* DatePickerView.swift */; };
 		6B36B0F129CE05CB009D7AB1 /* MemoBookToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */; };
 		6B36B0F329CE05CB009D7AB1 /* MemoPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B36B0F229CE05CB009D7AB1 /* MemoPageView.swift */; };
@@ -35,7 +36,19 @@
 		6BFE891D29DF4A7100B42BA1 /* ShapeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE891C29DF4A7100B42BA1 /* ShapeExtensions.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6B02A2202A25033E000BA43A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B36B0E529CE05CB009D7AB1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B36B0EC29CE05CB009D7AB1;
+			remoteInfo = MemoBookToDo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6B02A21C2A25033E000BA43A /* MemoBookToDo_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoBookToDo_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B02A21E2A25033E000BA43A /* MemoBookToDo_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBookToDo_Tests.swift; sourceTree = "<group>"; };
 		6B30882029F040CD008E29F6 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		6B36B0ED29CE05CB009D7AB1 /* MemoBookToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoBookToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBookToDoApp.swift; sourceTree = "<group>"; };
@@ -68,6 +81,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6B02A2192A25033E000BA43A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B36B0EA29CE05CB009D7AB1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -79,11 +99,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B02A21D2A25033E000BA43A /* MemoBookToDo_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6B02A21E2A25033E000BA43A /* MemoBookToDo_Tests.swift */,
+			);
+			path = MemoBookToDo_Tests;
+			sourceTree = "<group>";
+		};
 		6B36B0E429CE05CB009D7AB1 = {
 			isa = PBXGroup;
 			children = (
 				6B7F8C0629F766700084DFE3 /* README.md */,
 				6B36B0EF29CE05CB009D7AB1 /* MemoBookToDo */,
+				6B02A21D2A25033E000BA43A /* MemoBookToDo_Tests */,
 				6B36B0EE29CE05CB009D7AB1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				6B36B0ED29CE05CB009D7AB1 /* MemoBookToDo.app */,
+				6B02A21C2A25033E000BA43A /* MemoBookToDo_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,9 +133,9 @@
 				6B7F8C0129F705ED0084DFE3 /* Info.plist */,
 				6B36B0F029CE05CB009D7AB1 /* MemoBookToDoApp.swift */,
 				6BFE891629DDCBCB00B42BA1 /* MemoPage */,
-				6BCE7D6429E488FB00EAF3FC /* PreviewDataController.swift */,
 				6BCE7D6A29E5B43E00EAF3FC /* TypeExtensions */,
 				6B36B0FE29CE062D009D7AB1 /* MemoBook.xcdatamodeld */,
+				6BCE7D6429E488FB00EAF3FC /* PreviewDataController.swift */,
 				6B36B10129CE0680009D7AB1 /* DataController.swift */,
 				6BCE7D6D29E5DA0C00EAF3FC /* Constants.swift */,
 				6B36B0F429CE05CD009D7AB1 /* Assets.xcassets */,
@@ -221,6 +251,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6B02A21B2A25033E000BA43A /* MemoBookToDo_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B02A2222A25033E000BA43A /* Build configuration list for PBXNativeTarget "MemoBookToDo_Tests" */;
+			buildPhases = (
+				6B02A2182A25033E000BA43A /* Sources */,
+				6B02A2192A25033E000BA43A /* Frameworks */,
+				6B02A21A2A25033E000BA43A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6B02A2212A25033E000BA43A /* PBXTargetDependency */,
+			);
+			name = MemoBookToDo_Tests;
+			productName = MemoBookToDo_Tests;
+			productReference = 6B02A21C2A25033E000BA43A /* MemoBookToDo_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6B36B0EC29CE05CB009D7AB1 /* MemoBookToDo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6B36B0FB29CE05CD009D7AB1 /* Build configuration list for PBXNativeTarget "MemoBookToDo" */;
@@ -248,9 +296,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					6B02A21B2A25033E000BA43A = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 6B36B0EC29CE05CB009D7AB1;
+					};
 					6B36B0EC29CE05CB009D7AB1 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -273,11 +325,19 @@
 			projectRoot = "";
 			targets = (
 				6B36B0EC29CE05CB009D7AB1 /* MemoBookToDo */,
+				6B02A21B2A25033E000BA43A /* MemoBookToDo_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6B02A21A2A25033E000BA43A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B36B0EB29CE05CB009D7AB1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,6 +351,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6B02A2182A25033E000BA43A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B02A21F2A25033E000BA43A /* MemoBookToDo_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B36B0E929CE05CB009D7AB1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,7 +390,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6B02A2212A25033E000BA43A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6B36B0EC29CE05CB009D7AB1 /* MemoBookToDo */;
+			targetProxy = 6B02A2202A25033E000BA43A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6B02A2232A25033E000BA43A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F96TJRTX3X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "DerekHowes.MemoBookToDo-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemoBookToDo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MemoBookToDo";
+			};
+			name = Debug;
+		};
+		6B02A2242A25033E000BA43A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F96TJRTX3X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "DerekHowes.MemoBookToDo-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemoBookToDo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MemoBookToDo";
+			};
+			name = Release;
+		};
 		6B36B0F929CE05CD009D7AB1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -462,12 +576,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.22;
+				MARKETING_VERSION = 1.23;
 				PRODUCT_BUNDLE_IDENTIFIER = derekhowes.MemoBookToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -496,18 +613,30 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.22;
+				MARKETING_VERSION = 1.23;
 				PRODUCT_BUNDLE_IDENTIFIER = derekhowes.MemoBookToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6B02A2222A25033E000BA43A /* Build configuration list for PBXNativeTarget "MemoBookToDo_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B02A2232A25033E000BA43A /* Debug */,
+				6B02A2242A25033E000BA43A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6B36B0E829CE05CB009D7AB1 /* Build configuration list for PBXProject "MemoBookToDo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -16,7 +16,7 @@ struct MemoPageView: View {
     
     var body: some View {
         GeometryReader{ geo in
-            let numOfRows = Int((geo.size.height * 0.75) / rowHeight)
+            let numOfRows = Int((geo.size.height - 230) / rowHeight)
             
             VStack(alignment: .center, spacing: 0) {
                 ScrollView(Axis.Set.vertical) {
