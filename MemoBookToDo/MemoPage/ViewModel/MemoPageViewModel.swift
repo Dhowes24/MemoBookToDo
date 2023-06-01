@@ -79,12 +79,13 @@ class MemoPageViewModel: ObservableObject {
         let request = NSFetchRequest<ListItem>(entityName: "ListItem")
         
         do {
-            items = try mainContext.fetch(request).filter{
+            let tempItems = try mainContext.fetch(request).filter{
                 Calendar.current.numberOfDaysBetween($0.dateCreated ?? Date.distantFuture, and: date) == 0 ||
                 (Calendar.current.numberOfDaysBetween($0.dateCreated ?? Date.distantFuture, and: date) > 0 &&
                  $0.ongoing &&
                  Calendar.current.numberOfDaysBetween($0.dateCompleted ?? Date.distantFuture, and: date) <= 0)
             }
+            items = tempItems.sorted(by: {$0.dateCreated! < $1.dateCreated!})
         } catch let error {
             print("Error fetching. \(error)")
         }
