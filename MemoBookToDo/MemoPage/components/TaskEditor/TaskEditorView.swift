@@ -113,7 +113,7 @@ struct TaskEditorView: View {
                 taskName = itemToUpdate?.name ?? "No Name"
                 taskDeadline = itemToUpdate?.taskDeadline ?? Calendar.current.startOfDay(for: date)
                 taskDeadlingBool = itemToUpdate?.taskDeadline != nil
-                ongoing = itemToUpdate?.onGoing ?? false
+                ongoing = itemToUpdate?.ongoing ?? false
                 selection = priorities[Int(itemToUpdate?.priority ?? 0)]
                 
             } else {

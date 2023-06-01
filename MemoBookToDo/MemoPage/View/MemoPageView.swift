@@ -50,7 +50,7 @@ struct MemoPageView: View {
                                     item: item,
                                     initalLoad: $vm.initalLoad,
                                     number: Double(vm.items.firstIndex(of: item) ?? 0),
-                                    saveItem: {vm.saveData()},
+                                    completeItem: {_ in vm.completeTask(item) },
                                     deleteItem: {_ in vm.deleteItem(item) },
                                     updatingTaskBool: $vm.updatingTaskBool,
                                     updatingTaskItem: $vm.itemToUpdate,

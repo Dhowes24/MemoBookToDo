@@ -25,15 +25,15 @@ struct SheetRowView: View {
     @Binding var updatingTaskItem: ListItem?
     @Binding var showTaskEditor: Bool
     
-    var saveItem: (() -> Void)?
+    var completeItem: ((ListItem) -> Void)?
     var deleteItem: ((ListItem) -> Void)?
     
     init(date: Date = Date.now,
          item: ListItem? = nil,
          initalLoad: Binding<Bool>,
          number: Double = 0,
-         saveItem: ( () -> Void)? = nil,
-         deleteItem: ( (ListItem) -> Void)? = nil,
+         completeItem: ((ListItem) -> Void)? = nil,
+         deleteItem: ((ListItem) -> Void)? = nil,
          updatingTaskBool: Binding<Bool>,
          updatingTaskItem: Binding<ListItem?>,
          showTaskEditor: Binding<Bool>) {
@@ -65,7 +65,7 @@ struct SheetRowView: View {
         _showTaskEditor = showTaskEditor
         
         self.number = number
-        self.saveItem = saveItem
+        self.completeItem = completeItem
         self.deleteItem = deleteItem
     }
     
@@ -120,7 +120,7 @@ struct SheetRowView: View {
                     itemName: itemName,
                     multiline: $multiline,
                     number: number,
-                    saveItem: saveItem,
+                    completeItem: completeItem,
                     deleteItem: deleteItem))
                 .onLongPressGesture(
                     pressing: { pressed in pressing = pressed },
@@ -168,7 +168,7 @@ struct SheetRowViewModifier: ViewModifier {
     @Binding var multiline: Bool
     var number: Double
     
-    var saveItem: (() -> Void)?
+    var completeItem: ((ListItem) -> Void)?
     var deleteItem: ((ListItem) -> Void)?
     
     func body(content: Content) -> some View {
@@ -203,12 +203,11 @@ struct SheetRowViewModifier: ViewModifier {
                     .onEnded { _ in
                         initalLoad = false
                         withAnimation(Animation.easeInOut(duration: animationDuration)) {
-                            item.completed.toggle()
-                            completed.toggle()
-                            if item.onGoing {
-                                item.dateCompleted = completed ? date : nil
+                            if let completeItem = completeItem {
+                                completeItem(item)
                             }
-                            saveItem!()
+                            completed.toggle()
+     
                         }
                     }
             )
