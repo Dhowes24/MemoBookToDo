@@ -45,20 +45,31 @@ struct MemoPageView: View {
                             ForEach(Array(vm.items), id: \.self) { item in
                                 SheetRowSeperator()
                                 
-                                SheetRowView(
-                                    date: vm.date,
-                                    item: item,
-                                    initalLoad: $vm.initalLoad,
-                                    number: Double(vm.items.firstIndex(of: item) ?? 0),
-                                    completeItem: {_ in vm.completeTask(item) },
-                                    deleteItem: {_ in vm.deleteItem(item) },
-                                    updatingTaskBool: $vm.updatingTaskBool,
-                                    updatingTaskItem: $vm.itemToUpdate,
-                                    showTaskEditor: $vm.showTaskEditor)
+                                ZStack{
+                                    SheetRowView(
+                                        date: vm.date,
+                                        item: item,
+                                        initalLoad: $vm.initalLoad,
+                                        number: Double(vm.items.firstIndex(of: item) ?? 0),
+                                        completeItem: {_ in vm.completeTask(item) },
+                                        deleteItem: {_ in vm.deleteItem(item) },
+                                        updatingTaskBool: $vm.updatingTaskBool,
+                                        updatingTaskItem: $vm.itemToUpdate,
+                                        showTaskEditor: $vm.showTaskEditor)
+                                    
+                                    HStack(){
+                                        Color.clear
+                                            .contentShape(Rectangle())
+                                            .frame(width: 50)
+                                        Spacer()
+                                    }
+                                }
+                                
                             }
                         }
                     }
                 }
+                .padding(.bottom, 30)
             }
             .backgroundColor(paperWhite)
             .ignoresSafeArea()

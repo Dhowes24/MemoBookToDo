@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SheetRowView: View {
-    @Environment(\.colorScheme) var colorScheme
     @State private var completed: Bool
     private var date: Date
     @State var delete: Bool = false
