@@ -140,14 +140,16 @@ struct SheetRowView: View {
                 
             }
             .frame(maxWidth: .infinity,
-                   minHeight: multiline ?  doubleRowHeight : rowHeight)
+                   minHeight: multiline ?  doubleRowHeight : rowHeight,
+                   maxHeight: multiline ?  doubleRowHeight : rowHeight)
             .background(paperWhite)
                         
             HStack(){
                 Color.clear
                     .contentShape(Rectangle())
                     .frame(maxWidth: 50,
-                           minHeight: multiline ?  doubleRowHeight : rowHeight)
+                           minHeight: multiline ?  doubleRowHeight : rowHeight,
+                           maxHeight: multiline ?  doubleRowHeight : rowHeight)
                 Spacer()
             }
         }
