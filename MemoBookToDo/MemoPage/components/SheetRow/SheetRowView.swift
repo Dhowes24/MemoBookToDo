@@ -69,78 +69,88 @@ struct SheetRowView: View {
     }
     
     var body: some View {
-        HStack(alignment: .center) {
-            if let item = item{
-                Group {
-                    ZStack(){
-                        if multiline{
-                            SheetRowSeperator()
-                        }
-                        Group{
-                            HStack(){
-                                BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
-                                    .offset(x:0, y: multiline ? -20 : 0)
-                                TaskName(grow: grow,
-                                         name: itemName,
-                                         priorityColor: priorityColor(item),
-                                         multiline: multiline)
-                                Spacer()
+        
+        ZStack {
+            HStack(alignment: .center) {
+                if let item = item{
+                    Group {
+                        ZStack(){
+                            if multiline{
+                                SheetRowSeperator()
                             }
-                            .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
-                            CrossoutShapeView(completed: completed,
-                                              distances: distances,
-                                              initalLoad: initalLoad,
-                                              number: number)
-                            .offset(x:0, y: multiline ? -20 : 0)
-                            
-                            if multiline {
+                            Group{
+                                HStack(){
+                                    BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
+                                        .offset(x:0, y: multiline ? -20 : 0)
+                                    TaskName(grow: grow,
+                                             name: itemName,
+                                             priorityColor: priorityColor(item),
+                                             multiline: multiline)
+                                    Spacer()
+                                }
+                                .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
                                 CrossoutShapeView(completed: completed,
                                                   distances: distances,
                                                   initalLoad: initalLoad,
-                                                  number: number,
-                                                  multi: true)
-                                .offset(x:0, y: 20)
-                                .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
+                                                  number: number)
+                                .offset(x:0, y: multiline ? -20 : 0)
+                                
+                                if multiline {
+                                    CrossoutShapeView(completed: completed,
+                                                      distances: distances,
+                                                      initalLoad: initalLoad,
+                                                      number: number,
+                                                      multi: true)
+                                    .offset(x:0, y: 20)
+                                    .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
+                                }
                             }
+                            .opacity(press ? 0.5 : 1.0)
+                            TrashLabel(dragAmount: dragAmount, multiline: multiline)
                         }
-                        .opacity(press ? 0.5 : 1.0)
-                        TrashLabel(dragAmount: dragAmount, multiline: multiline)
                     }
-                }
-                .background(paperWhite)
-                .modifier(SheetRowViewModifier(
-                    completed: $completed,
-                    date: date,
-                    delete: $delete,
-                    drag: $dragAmount,
-                    grow: $grow,
-                    initalLoad: $initalLoad,
-                    item: item,
-                    itemName: itemName,
-                    multiline: $multiline,
-                    number: number,
-                    completeItem: completeItem,
-                    deleteItem: deleteItem))
-                .simultaneousGesture (
-                    LongPressGesture(minimumDuration: 0.6)
-                        .updating($press) { currentState, gestureState, transaction in
-                            gestureState = currentState
-                        }
-                        .onEnded{ finished in
-                            withAnimation {
-                                updatingTaskBool = true
-                                updatingTaskItem = item
-                                showTaskEditor = true
+                    .background(paperWhite)
+                    .modifier(SheetRowViewModifier(
+                        completed: $completed,
+                        date: date,
+                        delete: $delete,
+                        drag: $dragAmount,
+                        grow: $grow,
+                        initalLoad: $initalLoad,
+                        item: item,
+                        itemName: itemName,
+                        multiline: $multiline,
+                        number: number,
+                        completeItem: completeItem,
+                        deleteItem: deleteItem))
+                    .simultaneousGesture (
+                        LongPressGesture(minimumDuration: 0.6)
+                            .updating($press) { currentState, gestureState, transaction in
+                                gestureState = currentState
                             }
-                        }
-                )
+                            .onEnded{ finished in
+                                withAnimation {
+                                    updatingTaskBool = true
+                                    updatingTaskItem = item
+                                    showTaskEditor = true
+                                }
+                            }
+                    )
+                }
+                
             }
-            
+            .frame(maxWidth: .infinity,
+                   minHeight: multiline ?  doubleRowHeight : rowHeight)
+            .background(paperWhite)
+                        
+            HStack(){
+                Color.clear
+                    .contentShape(Rectangle())
+                    .frame(maxWidth: 50,
+                           minHeight: multiline ?  doubleRowHeight : rowHeight)
+                Spacer()
+            }
         }
-        .frame(maxWidth: .infinity,
-               minHeight: multiline ?  doubleRowHeight : rowHeight,
-               maxHeight: multiline ?  doubleRowHeight : rowHeight )
-        .background(paperWhite)
     }
     
     func priorityColor(_ item: ListItem) -> Color{

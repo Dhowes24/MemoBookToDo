@@ -30,13 +30,13 @@ struct MemoPageView: View {
                         VStack(spacing: 0){
                             ForEach(0..<numOfRows, id: \.self) { item in
                                 SheetRowSeperator()
-
+                                
                                 SheetRowView(
                                     initalLoad: .constant(false),
                                     updatingTaskBool: .constant(false),
                                     updatingTaskItem: .constant(nil),
                                     showTaskEditor: .constant(false))
-
+                                
                             }
                             SheetRowSeperator()
                         }
@@ -45,26 +45,16 @@ struct MemoPageView: View {
                             ForEach(Array(vm.items), id: \.self) { item in
                                 SheetRowSeperator()
                                 
-                                ZStack{
-                                    SheetRowView(
-                                        date: vm.date,
-                                        item: item,
-                                        initalLoad: $vm.initalLoad,
-                                        number: Double(vm.items.firstIndex(of: item) ?? 0),
-                                        completeItem: {_ in vm.completeTask(item) },
-                                        deleteItem: {_ in vm.deleteItem(item) },
-                                        updatingTaskBool: $vm.updatingTaskBool,
-                                        updatingTaskItem: $vm.itemToUpdate,
-                                        showTaskEditor: $vm.showTaskEditor)
-                                    
-                                    HStack(){
-                                        Color.clear
-                                            .contentShape(Rectangle())
-                                            .frame(width: 50)
-                                        Spacer()
-                                    }
-                                }
-                                
+                                SheetRowView(
+                                    date: vm.date,
+                                    item: item,
+                                    initalLoad: $vm.initalLoad,
+                                    number: Double(vm.items.firstIndex(of: item) ?? 0),
+                                    completeItem: {_ in vm.completeTask(item) },
+                                    deleteItem: {_ in vm.deleteItem(item) },
+                                    updatingTaskBool: $vm.updatingTaskBool,
+                                    updatingTaskItem: $vm.itemToUpdate,
+                                    showTaskEditor: $vm.showTaskEditor)
                             }
                         }
                     }
@@ -92,7 +82,7 @@ struct MemoPageView: View {
                     updating: $vm.updatingTaskBool,
                     itemToUpdate: $vm.itemToUpdate,
                     updateItem: vm.updateItem)
-                    .offset(x: vm.showTaskEditor ? 0: UIScreen.mainWidth)
+                .offset(x: vm.showTaskEditor ? 0: UIScreen.mainWidth)
             }
             .opacity(vm.showTaskEditor || vm.chooseDate  ? 1 : 0)
         }
@@ -104,7 +94,7 @@ struct MemoPageView: View {
         .onAppear {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                 if success {
-//
+                    //
                 } else if let error = error {
                     print(error.localizedDescription)
                 }
