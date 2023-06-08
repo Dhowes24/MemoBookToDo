@@ -21,7 +21,7 @@ struct SheetHeaderPunchHoleView: View {
                     .frame(width: 30,height: 30, alignment: .leading)
                     .padding(.horizontal, 4)
                 
-                    binderRing()
+                    BinderRing()
                         .fill(
                             LinearGradient(gradient: Gradient(colors: [.gray, .gray, .white, .gray]), startPoint: .top, endPoint: .bottom)
                         )
@@ -33,7 +33,7 @@ struct SheetHeaderPunchHoleView: View {
     }
 }
 
-private struct binderRing: Shape {
+private struct BinderRing: Shape {
     
     func path(in rect: CGRect) -> Path {
         

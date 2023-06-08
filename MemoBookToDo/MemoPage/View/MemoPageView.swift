@@ -8,53 +8,53 @@ import SwiftUI
 import UserNotifications
 
 struct MemoPageView: View {
-    @StateObject private var vm = MemoPageViewModel()
+    @StateObject private var viewModel = MemoPageViewModel()
     
     init() {
         UIScrollView.appearance().bounces = false
     }
     
     var body: some View {
-        GeometryReader{ geo in
-            let numOfRows = Int((geo.size.height - 230) / rowHeight)
+        GeometryReader{ screen in
+            let numOfRows = Int((screen.size.height - 230) / rowHeight)
             
             VStack(alignment: .center, spacing: 0) {
                 ScrollView(Axis.Set.vertical) {
                     SheetHeaderView(
-                        chooseDate: $vm.chooseDate,
-                        date: $vm.date,
-                        initalLoad: $vm.initalLoad,
-                        showTaskEditor: $vm.showTaskEditor)
+                        chooseDate: $viewModel.chooseDate,
+                        date: $viewModel.date,
+                        initialLoad: $viewModel.initialLoad,
+                        showTaskEditor: $viewModel.showTaskEditor)
                     
                     ZStack(alignment: .topLeading){
                         VStack(spacing: 0){
                             ForEach(0..<numOfRows, id: \.self) { item in
-                                SheetRowSeperator()
+                                SheetRowSeparator()
                                 
                                 SheetRowView(
-                                    initalLoad: .constant(false),
+                                    initialLoad: .constant(false),
                                     updatingTaskBool: .constant(false),
                                     updatingTaskItem: .constant(nil),
                                     showTaskEditor: .constant(false))
                                 
                             }
-                            SheetRowSeperator()
+                            SheetRowSeparator()
                         }
                         
                         VStack(spacing: 0){
-                            ForEach(Array(vm.items), id: \.self) { item in
-                                SheetRowSeperator()
+                            ForEach(Array(viewModel.items), id: \.self) { item in
+                                SheetRowSeparator()
                                 
                                 SheetRowView(
-                                    date: vm.date,
+                                    date: viewModel.date,
                                     item: item,
-                                    initalLoad: $vm.initalLoad,
-                                    number: Double(vm.items.firstIndex(of: item) ?? 0),
-                                    completeItem: {_ in vm.completeTask(item) },
-                                    deleteItem: {_ in vm.deleteItem(item) },
-                                    updatingTaskBool: $vm.updatingTaskBool,
-                                    updatingTaskItem: $vm.itemToUpdate,
-                                    showTaskEditor: $vm.showTaskEditor)
+                                    initialLoad: $viewModel.initialLoad,
+                                    number: Double(viewModel.items.firstIndex(of: item) ?? 0),
+                                    completeItem: {_ in viewModel.completeTask(item) },
+                                    deleteItem: {_ in viewModel.deleteItem(item) },
+                                    updatingTaskBool: $viewModel.updatingTaskBool,
+                                    updatingTaskItem: $viewModel.itemToUpdate,
+                                    showTaskEditor: $viewModel.showTaskEditor)
                             }
                         }
                     }
@@ -65,30 +65,30 @@ struct MemoPageView: View {
             .ignoresSafeArea()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             ZStack(alignment: .center){
-                Color.black.opacity(vm.showTaskEditor || vm.chooseDate ? opacityVal : 0)
+                Color.black.opacity(viewModel.showTaskEditor || viewModel.chooseDate ? opacityVal : 0)
                     .ignoresSafeArea()
                     .onTapGesture {
                         withAnimation {
-                            vm.showTaskEditor = false
-                            vm.chooseDate = false
+                            viewModel.showTaskEditor = false
+                            viewModel.chooseDate = false
                         }
                     }
-                DatePickerView(date: $vm.date)
-                    .offset(x: vm.chooseDate ? 0: -UIScreen.mainWidth)
+                DatePickerView(date: $viewModel.date)
+                    .offset(x: viewModel.chooseDate ? 0: -UIScreen.mainWidth)
                 TaskEditorView(
-                    addItem: vm.addItem,
-                    date: vm.date,
-                    showEditor: $vm.showTaskEditor,
-                    updating: $vm.updatingTaskBool,
-                    itemToUpdate: $vm.itemToUpdate,
-                    updateItem: vm.updateItem)
-                .offset(x: vm.showTaskEditor ? 0: UIScreen.mainWidth)
+                    addItem: viewModel.addItem,
+                    date: viewModel.date,
+                    showEditor: $viewModel.showTaskEditor,
+                    updating: $viewModel.updatingTaskBool,
+                    itemToUpdate: $viewModel.itemToUpdate,
+                    updateItem: viewModel.updateItem)
+                .offset(x: viewModel.showTaskEditor ? 0: UIScreen.mainWidth)
             }
-            .opacity(vm.showTaskEditor || vm.chooseDate  ? 1 : 0)
+            .opacity(viewModel.showTaskEditor || viewModel.chooseDate  ? 1 : 0)
         }
-        .onChange(of: vm.date) { _ in
+        .onChange(of: viewModel.date) { _ in
             withAnimation {
-                vm.newLoad()
+                viewModel.newLoad()
             }
         }
         .onAppear {
@@ -99,7 +99,7 @@ struct MemoPageView: View {
                     print(error.localizedDescription)
                 }
             }
-            vm.cleanUpCoreData()
+            viewModel.cleanUpCoreData()
         }
     }
 }

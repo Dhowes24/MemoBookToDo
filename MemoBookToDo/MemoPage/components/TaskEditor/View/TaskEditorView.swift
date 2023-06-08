@@ -17,7 +17,7 @@ struct TaskEditorView: View {
     @Binding var showEditor: Bool
     @State var taskName: String = ""
     @State var taskDeadline: Date = Calendar.current.startOfDay(for: Date.now)
-    @State var taskDeadlingBool: Bool = false
+    @State var taskDeadlineBool: Bool = false
     @FocusState var textIsFocused: Bool
     @Binding var updating: Bool
     @Binding var itemToUpdate: ListItem?
@@ -52,13 +52,13 @@ struct TaskEditorView: View {
             }
             .padding(10)
             
-            Toggle(isOn: $taskDeadlingBool) {
+            Toggle(isOn: $taskDeadlineBool) {
                 Text("Task Deadline: ")
                     .font(.system(size: regularText))
             }
             .padding(10)
             
-            if taskDeadlingBool {
+            if taskDeadlineBool {
                 DatePicker("", selection: $taskDeadline, displayedComponents: .hourAndMinute)
                     .padding(10)
             }
@@ -70,7 +70,7 @@ struct TaskEditorView: View {
             .padding(10)
             
             Button {
-                let deadline = taskDeadlingBool ? taskDeadline : nil
+                let deadline = taskDeadlineBool ? taskDeadline : nil
                 
                 if updating {
                     if let itemToUpdate = itemToUpdate {
@@ -112,7 +112,7 @@ struct TaskEditorView: View {
             if showEditor && updating {
                 taskName = itemToUpdate?.name ?? "No Name"
                 taskDeadline = itemToUpdate?.taskDeadline ?? Calendar.current.startOfDay(for: date)
-                taskDeadlingBool = itemToUpdate?.taskDeadline != nil
+                taskDeadlineBool = itemToUpdate?.taskDeadline != nil
                 ongoing = itemToUpdate?.ongoing ?? false
                 selection = priorities[Int(itemToUpdate?.priority ?? 0)]
                 
@@ -120,7 +120,7 @@ struct TaskEditorView: View {
                 let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
                     taskName = ""
                     taskDeadline = Calendar.current.startOfDay(for: date)
-                    taskDeadlingBool = false
+                    taskDeadlineBool = false
                     ongoing = false
                     selection = "None"
                     textIsFocused = false

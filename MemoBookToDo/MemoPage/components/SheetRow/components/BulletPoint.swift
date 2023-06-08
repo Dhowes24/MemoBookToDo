@@ -11,7 +11,7 @@ struct BulletPoint: View {
     @Environment(\.colorScheme) var colorScheme
 
     var grow: Bool
-    var initalLoad: Bool
+    var initialLoad: Bool
     var number: Double
     let diameter: CGFloat = 15
     
@@ -32,6 +32,6 @@ struct BulletPoint: View {
 
 struct BulletPoint_Previews: PreviewProvider {
     static var previews: some View {
-        BulletPoint(grow: false, initalLoad: false, number: 0.0)
+        BulletPoint(grow: false, initialLoad: false, number: 0.0)
     }
 }

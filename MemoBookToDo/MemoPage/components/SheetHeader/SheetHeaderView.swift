@@ -12,7 +12,7 @@ struct SheetHeaderView: View {
     
     @Binding var chooseDate: Bool
     @Binding var date: Date
-    @Binding var initalLoad: Bool
+    @Binding var initialLoad: Bool
     @State private var offset: CGSize = CGSize.zero
     @State private var offsetAnimation: CGFloat = 0
     @Binding var showTaskEditor: Bool
@@ -59,7 +59,7 @@ struct SheetHeaderView: View {
                     Button {
                         withAnimation(Animation.easeInOut(duration: 0.3)) {
                             showTaskEditor.toggle()
-                            initalLoad = false
+                            initialLoad = false
                         }
                         
                     } label: {
@@ -130,7 +130,7 @@ struct SheetHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         SheetHeaderView  (chooseDate: .constant(false),
                           date: .constant(Date.now),
-                          initalLoad: .constant(true),
+                          initialLoad: .constant(true),
                           showTaskEditor: .constant(false))
     }
 }

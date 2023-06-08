@@ -396,7 +396,7 @@ class MemoBookViewModel_Tests: XCTestCase {
         
         //Then
         XCTAssertFalse(testVm.chooseDate)
-        XCTAssertTrue(testVm.initalLoad)
+        XCTAssertTrue(testVm.initialLoad)
         XCTAssertTrue(testVm.items.count == 1)
     }
     

@@ -15,7 +15,7 @@ class MemoPageViewModel: ObservableObject {
     
     @Published var chooseDate: Bool = false
     @Published var date: Date = Date.now
-    @Published var initalLoad: Bool = true
+    @Published var initialLoad: Bool = true
     @Published var items: [ListItem] = []
     @Published var showTaskEditor: Bool = false
     @Published var updatingTaskBool: Bool = false
@@ -100,8 +100,8 @@ class MemoPageViewModel: ObservableObject {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         let request = NSFetchRequest<ListItem>(entityName: "ListItem")
         do {
-            let notifcations = try mainContext.fetch(request)
-            for notification in notifcations {
+            let notifications = try mainContext.fetch(request)
+            for notification in notifications {
                 if(!notification.completed) {
                     setLocalNotification(deadline: notification.taskDeadline, taskName: notification.name ?? "Task")
                 }
@@ -113,7 +113,7 @@ class MemoPageViewModel: ObservableObject {
     
     func newLoad() {
         chooseDate = false
-        initalLoad = true
+        initialLoad = true
         fetchItems()
     }
     

@@ -1,5 +1,5 @@
 //
-//  CrossoutShapeView.swift
+//  CrossOutShapeView.swift
 //  MemoBookToDo
 //
 //  Created by Derek Howes on 4/6/23.
@@ -11,18 +11,18 @@ import PureSwiftUI
 private let gridLayoutGuide = LayoutGuideConfig.grid(columns: 45, rows: 10)
 private typealias Curve = (p: CGPoint, cp1: CGPoint, cp2: CGPoint)
 
-struct CrossoutShapeView: View{
+struct CrossOutShapeView: View{
     @Environment(\.colorScheme) var colorScheme
 
     var completed: Bool
-    var initalLoad: Bool
+    var initialLoad: Bool
     var number: Double
     var multi: Bool
-    var squiggle: squiggle
+    var squiggle: Squiggle
     
-    init(completed: Bool, distances: [UInt8], initalLoad: Bool, number: Double, multi: Bool = false) {
+    init(completed: Bool, distances: [UInt8], initialLoad: Bool, number: Double, multi: Bool = false) {
         self.completed = completed
-        self.initalLoad = initalLoad
+        self.initialLoad = initialLoad
         self.number = number
         self.multi = multi
         
@@ -34,7 +34,7 @@ struct CrossoutShapeView: View{
                 distancesInts.append(8)
             }
         }
-        self.squiggle = MemoBookToDo.squiggle(distances: distancesInts)
+        self.squiggle = MemoBookToDo.Squiggle(distances: distancesInts)
     }
     
     var body: some View {
@@ -50,38 +50,38 @@ struct CrossoutShapeView: View{
     }
 }
 
-struct squiggle: Shape {
+struct Squiggle: Shape {
     let squiggles: Int = 3
     var distances: [Int]
     let spacing: Int = 10
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        let g = gridLayoutGuide.layout(in: rect)
+        let grid = gridLayoutGuide.layout(in: rect)
         var curves = [Curve]()
             
-        let p1 = g[-1,8]
-        path.move(p1)
+        let point0 = grid[-1,8]
+        path.move(point0)
         
         for i in 0...squiggles {
             let distance = distances[i] + (spacing * i)
 
-            let point1 = g[distance, 2]
+            let point1 = grid[distance, 2]
             curves.append(Curve(point1,
-                               g[distance, 1],
-                               g[distance, 1]))
+                               grid[distance, 1],
+                                grid[distance, 1]))
 
-            let point2 = g[distance-1, 7]
+            let point2 = grid[distance-1, 7]
             curves.append(Curve(point2,
-                               g[distance-1, 4],
-                               g[distance-2, 7]))
+                                grid[distance-1, 4],
+                                grid[distance-2, 7]))
         }
 
         for curve in curves {
             path.curve(curve.p, cp1: curve.cp1, cp2: curve.cp2)
         }
 
-        let endPoint = g[46,4]
+        let endPoint = grid[46,4]
         path.curve(endPoint, cp1: endPoint, cp2: endPoint)
                 
         return path
@@ -89,9 +89,9 @@ struct squiggle: Shape {
 }
 
 
-struct CrossoutShapeView_Previews: PreviewProvider {
+struct CrossOutShapeView_Previews: PreviewProvider {
     static var previews: some View {
-        CrossoutShapeView(completed: true, distances: [8,8,8,8], initalLoad: false, number: 0.0)
+        CrossOutShapeView(completed: true, distances: [8,8,8,8], initialLoad: false, number: 0.0)
             .showLayoutGuides(true)
     }
 }

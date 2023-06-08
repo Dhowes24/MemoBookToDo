@@ -10,7 +10,7 @@ import SwiftUI
 
 //Colors
 //_______________________________________________________
-let blueSeperator: Color = Color.init(hex: 0x6296C6)
+let blueSeparator: Color = Color.init(hex: 0x6296C6)
 let paperWhite: Color = Color.init(hex: 0xF5F5F5)
 let priorityLow: Color = Color.init(hex: 0xB3F395)
 let priorityMedium: Color = Color.init(hex: 0xF4DD88)
@@ -29,7 +29,7 @@ let capsuleHorizontalPadding: CGFloat = 10
 let doubleRowHeight: CGFloat = 82
 let rowHeight: CGFloat = 40
 let taskNameFontSize: CGFloat = 20
-let taskWidthAvaliable: CGFloat = UIScreen.mainWidth - 80
+let taskWidthAvailable: CGFloat = UIScreen.mainWidth - 80
 
 //Dates
 //_______________________________________________________

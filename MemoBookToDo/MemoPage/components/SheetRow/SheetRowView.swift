@@ -16,7 +16,7 @@ struct SheetRowView: View {
     @State private var grow: Bool = false
     var item: ListItem?
     let itemName: String
-    @Binding var initalLoad: Bool
+    @Binding var initialLoad: Bool
     @State var multiline: Bool
     var number: Double = 0
     @GestureState var press = false
@@ -29,7 +29,7 @@ struct SheetRowView: View {
     
     init(date: Date = Date.now,
          item: ListItem? = nil,
-         initalLoad: Binding<Bool>,
+         initialLoad: Binding<Bool>,
          number: Double = 0,
          completeItem: ((ListItem) -> Void)? = nil,
          deleteItem: ((ListItem) -> Void)? = nil,
@@ -50,10 +50,10 @@ struct SheetRowView: View {
         } else {
             self.itemName = item?.name ?? "Error"
         }
-        _initalLoad = initalLoad
+        _initialLoad = initialLoad
         
         let nameWidth: CGFloat = itemName.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width
-        if nameWidth > taskWidthAvaliable {
+        if nameWidth > taskWidthAvailable {
             _multiline = State(initialValue: true)
         } else {
             _multiline = State(initialValue: false)
@@ -76,11 +76,11 @@ struct SheetRowView: View {
                     Group {
                         ZStack(){
                             if multiline{
-                                SheetRowSeperator()
+                                SheetRowSeparator()
                             }
                             Group{
                                 HStack(){
-                                    BulletPoint(grow: grow, initalLoad: initalLoad, number: number)
+                                    BulletPoint(grow: grow, initialLoad: initialLoad, number: number)
                                         .offset(x:0, y: multiline ? -20 : 0)
                                     TaskName(grow: grow,
                                              name: itemName,
@@ -89,16 +89,16 @@ struct SheetRowView: View {
                                     Spacer()
                                 }
                                 .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
-                                CrossoutShapeView(completed: completed,
+                                CrossOutShapeView(completed: completed,
                                                   distances: distances,
-                                                  initalLoad: initalLoad,
+                                                  initialLoad: initialLoad,
                                                   number: number)
                                 .offset(x:0, y: multiline ? -20 : 0)
                                 
                                 if multiline {
-                                    CrossoutShapeView(completed: completed,
+                                    CrossOutShapeView(completed: completed,
                                                       distances: distances,
-                                                      initalLoad: initalLoad,
+                                                      initialLoad: initialLoad,
                                                       number: number,
                                                       multi: true)
                                     .offset(x:0, y: 20)
@@ -116,7 +116,7 @@ struct SheetRowView: View {
                         delete: $delete,
                         drag: $dragAmount,
                         grow: $grow,
-                        initalLoad: $initalLoad,
+                        initialLoad: $initialLoad,
                         item: item,
                         itemName: itemName,
                         multiline: $multiline,
@@ -176,7 +176,7 @@ struct SheetRowViewModifier: ViewModifier {
     @Binding var delete: Bool
     @Binding var drag : CGSize
     @Binding var grow: Bool
-    @Binding var initalLoad: Bool
+    @Binding var initialLoad: Bool
     var item: ListItem
     var itemName: String
     @Binding var multiline: Bool
@@ -188,7 +188,7 @@ struct SheetRowViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear(perform: {
-                withAnimation(Animation.easeInOut(duration: animationDuration).delay(initalLoad ? number * initialLoadDelay : 0)) {
+                withAnimation(Animation.easeInOut(duration: animationDuration).delay(initialLoad ? number * initialLoadDelay : 0)) {
                     grow = true
                     completed = item.completed
                 }
@@ -215,7 +215,7 @@ struct SheetRowViewModifier: ViewModifier {
             .simultaneousGesture(
                 TapGesture()
                     .onEnded { _ in
-                        initalLoad = false
+                        initialLoad = false
                         withAnimation(Animation.easeInOut(duration: animationDuration)) {
                             if let completeItem = completeItem {
                                 completeItem(item)
@@ -227,7 +227,7 @@ struct SheetRowViewModifier: ViewModifier {
             )
             .onChange(of: itemName) { newName in
                 let nameWidth: CGFloat = newName.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width
-                if nameWidth > taskWidthAvaliable {
+                if nameWidth > taskWidthAvailable {
                     multiline = true
                 } else {
                     multiline = false
@@ -241,7 +241,7 @@ struct SheetRowView_Previews: PreviewProvider {
         let previewDataController = PreviewDataController()
         let item = previewDataController.savePreviewData()
         
-        return SheetRowView(item: item, initalLoad: .constant(false), updatingTaskBool: .constant(false), updatingTaskItem: .constant(nil), showTaskEditor: .constant(false))
+        return SheetRowView(item: item, initialLoad: .constant(false), updatingTaskBool: .constant(false), updatingTaskItem: .constant(nil), showTaskEditor: .constant(false))
             .environment(
                 \.managedObjectContext,
                  previewDataController.viewContext
