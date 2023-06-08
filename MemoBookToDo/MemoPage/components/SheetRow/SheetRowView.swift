@@ -20,7 +20,7 @@ struct SheetRowView: View {
     @Binding var initalLoad: Bool
     @State var multiline: Bool
     var number: Double = 0
-    @State private var pressing = false
+    @GestureState var press = false
     @Binding var updatingTaskBool: Bool
     @Binding var updatingTaskItem: ListItem?
     @Binding var showTaskEditor: Bool
@@ -104,11 +104,11 @@ struct SheetRowView: View {
                                 .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
                             }
                         }
+                        .opacity(press ? 0.5 : 1.0)
                         TrashLabel(dragAmount: dragAmount, multiline: multiline)
                     }
                 }
                 .background(paperWhite)
-                .opacity(pressing ? 0.5 : 1)
                 .modifier(SheetRowViewModifier(
                     completed: $completed,
                     date: date,
@@ -122,15 +122,18 @@ struct SheetRowView: View {
                     number: number,
                     completeItem: completeItem,
                     deleteItem: deleteItem))
-                .onLongPressGesture(
-                    pressing: { pressed in pressing = pressed },
-                    perform: {
-                        withAnimation {
-                            updatingTaskBool = true
-                            updatingTaskItem = item
-                            showTaskEditor = true
+                .simultaneousGesture (
+                    LongPressGesture(minimumDuration: 0.6)
+                        .updating($press) { currentState, gestureState, transaction in
+                            gestureState = currentState
                         }
-                    }
+                        .onEnded{ finished in
+                            withAnimation {
+                                updatingTaskBool = true
+                                updatingTaskItem = item
+                                showTaskEditor = true
+                            }
+                        }
                 )
             }
             

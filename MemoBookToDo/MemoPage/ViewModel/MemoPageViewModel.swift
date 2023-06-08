@@ -29,7 +29,12 @@ class MemoPageViewModel: ObservableObject {
     func addItem(name: String, ongoing: Bool,  priority: Int16, deadline: Date?) {
         let item = ListItem(context: mainContext)
         item.completed = false
-        item.dateCreated = date
+        if Calendar.current.numberOfDaysBetween(date, and: Date.now) != 0 {
+            item.dateCreated = Calendar.current.numberOfDaysBetween(Date.now, and: date) > 0 ?
+            Calendar.current.startOfDay(for: date) : Calendar.current.endOfDay(for: date)
+        } else {
+            item.dateCreated = date
+        }
         item.name = name
         item.ongoing = ongoing
         item.priority = priority
@@ -122,7 +127,6 @@ class MemoPageViewModel: ObservableObject {
     }
     
     func updateItem(_ item: ListItem, name: String, ongoing: Bool,  priority: Int16, deadline: Date?) {
-        item.completed = false
         item.name = name
         item.ongoing = ongoing
         item.priority = priority
