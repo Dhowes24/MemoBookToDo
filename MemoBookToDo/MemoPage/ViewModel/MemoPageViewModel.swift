@@ -30,8 +30,27 @@ class MemoPageViewModel: ObservableObject {
         let item = ListItem(context: mainContext)
         item.completed = false
         if Calendar.current.numberOfDaysBetween(date, and: Date.now) != 0 {
-            item.dateCreated = Calendar.current.numberOfDaysBetween(Date.now, and: date) > 0 ?
-            Calendar.current.startOfDay(for: date) : Calendar.current.endOfDay(for: date)
+            var organizationCounter = 0
+            var tempDateCreated: Date
+            var tempItems = items
+            var forward: Bool = true
+            
+            if Calendar.current.numberOfDaysBetween(Date.now, and: date) > 0 {
+                tempDateCreated = Calendar.current.startOfDay(for: date)
+            } else {
+                tempDateCreated = Calendar.current.endOfDay(for: date)
+                tempItems.reverse()
+                forward = false
+            }
+            
+            for i in tempItems {
+                if i.dateCreated == tempDateCreated {
+                    organizationCounter += 1
+                    tempDateCreated = Calendar.current.date(byAdding: .second, value: forward ? organizationCounter : -organizationCounter, to: tempDateCreated)!
+                }
+            }
+            
+            item.dateCreated = tempDateCreated
         } else {
             item.dateCreated = date
         }
@@ -90,7 +109,22 @@ class MemoPageViewModel: ObservableObject {
                  $0.ongoing &&
                  Calendar.current.numberOfDaysBetween($0.dateCompleted ?? Date.distantFuture, and: date) <= 0)
             }
-            items = tempItems.sorted(by: {$0.dateCreated! < $1.dateCreated!})
+            
+            items = tempItems.sorted(by: {
+                if $0.dateCreated! ==  $1.dateCreated! {
+                    return $0.id < $1.id
+                } else {
+                    return $0.dateCreated! < $1.dateCreated!
+                }
+            })
+            
+//            print("\n sorting for \(date)")
+//            for i in items {
+//                print(i.name ?? "no Name")
+//                print(i.dateCreated!)
+//                print(i.id)
+//                print("\n")
+//            }
         } catch let error {
             print("Error fetching. \(error)")
         }
