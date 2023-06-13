@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SheetRowView: View {
+    @StateObject private var viewModel: SheetRowViewModel = SheetRowViewModel()
+    
     @State private var completed: Bool
     private var date: Date
     @State var delete: Bool = false
@@ -18,7 +20,7 @@ struct SheetRowView: View {
     let itemName: String
     @Binding var initialLoad: Bool
     @State var multiline: Bool
-    var number: Double = 0
+    var placement: Double = 0
     @GestureState var press = false
     @Binding var updatingTaskBool: Bool
     @Binding var updatingTaskItem: ListItem?
@@ -30,7 +32,7 @@ struct SheetRowView: View {
     init(date: Date = Date.now,
          item: ListItem? = nil,
          initialLoad: Binding<Bool>,
-         number: Double = 0,
+         placement: Double = 0,
          completeItem: ((ListItem) -> Void)? = nil,
          deleteItem: ((ListItem) -> Void)? = nil,
          updatingTaskBool: Binding<Bool>,
@@ -43,9 +45,8 @@ struct SheetRowView: View {
         self.item = item
         
         if item?.taskDeadline != nil {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "hh:mm a"
-            let hourString = formatter.string(from: item!.taskDeadline!)
+            dateFormatter.dateFormat = "hh:mm a"
+            let hourString = dateFormatter.string(from: item!.taskDeadline!)
             self.itemName = "\(hourString): \(item?.name ?? "Error")"
         } else {
             self.itemName = item?.name ?? "Error"
@@ -63,7 +64,7 @@ struct SheetRowView: View {
         _updatingTaskItem = updatingTaskItem
         _showTaskEditor = showTaskEditor
         
-        self.number = number
+        self.placement = placement
         self.completeItem = completeItem
         self.deleteItem = deleteItem
     }
@@ -80,11 +81,11 @@ struct SheetRowView: View {
                             }
                             Group{
                                 HStack(){
-                                    BulletPoint(grow: grow, initialLoad: initialLoad, number: number)
+                                    BulletPoint(grow: grow, initialLoad: initialLoad)
                                         .offset(x:0, y: multiline ? -20 : 0)
                                     TaskName(grow: grow,
                                              name: itemName,
-                                             priorityColor: priorityColor(item),
+                                             priorityColor: viewModel.priorityColor(item),
                                              multiline: multiline)
                                     Spacer()
                                 }
@@ -92,14 +93,14 @@ struct SheetRowView: View {
                                 CrossOutShapeView(completed: completed,
                                                   distances: distances,
                                                   initialLoad: initialLoad,
-                                                  number: number)
+                                                  placement: placement)
                                 .offset(x:0, y: multiline ? -20 : 0)
                                 
                                 if multiline {
                                     CrossOutShapeView(completed: completed,
                                                       distances: distances,
                                                       initialLoad: initialLoad,
-                                                      number: number,
+                                                      placement: placement,
                                                       multi: true)
                                     .offset(x:0, y: 20)
                                     .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
@@ -120,7 +121,7 @@ struct SheetRowView: View {
                         item: item,
                         itemName: itemName,
                         multiline: $multiline,
-                        number: number,
+                        placement: placement,
                         completeItem: completeItem,
                         deleteItem: deleteItem))
                     .simultaneousGesture (
@@ -154,20 +155,6 @@ struct SheetRowView: View {
             }
         }
     }
-    
-    func priorityColor(_ item: ListItem) -> Color{
-        switch item.priority{
-        case 1:
-            return priorityLow
-        case 2:
-            return priorityMedium
-        case 3:
-            return priorityHigh
-        default:
-            return paperWhite.opacity(0)
-        }
-    }
-    
 }
 
 struct SheetRowViewModifier: ViewModifier {
@@ -180,7 +167,7 @@ struct SheetRowViewModifier: ViewModifier {
     var item: ListItem
     var itemName: String
     @Binding var multiline: Bool
-    var number: Double
+    var placement: Double
     
     var completeItem: ((ListItem) -> Void)?
     var deleteItem: ((ListItem) -> Void)?
@@ -188,7 +175,7 @@ struct SheetRowViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear(perform: {
-                withAnimation(Animation.easeInOut(duration: animationDuration).delay(initialLoad ? number * initialLoadDelay : 0)) {
+                withAnimation(Animation.easeInOut(duration: animationDuration).delay(initialLoad ? placement * initialLoadDelay : 0)) {
                     grow = true
                     completed = item.completed
                 }

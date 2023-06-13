@@ -35,3 +35,4 @@ let taskWidthAvailable: CGFloat = UIScreen.mainWidth - 80
 //_______________________________________________________
 var twoMonthsAgo: Date = (Calendar.current.date(byAdding: .month, value: -2, to: Date()) ?? Date.distantPast)
 var twoMonthsAway: Date = (Calendar.current.date(byAdding: .month, value: 2, to: Date()) ?? Date.distantFuture)
+var dateFormatter = DateFormatter()

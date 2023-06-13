@@ -8,6 +8,7 @@ import SwiftUI
 import UserNotifications
 
 struct MemoPageView: View {
+    @Environment(\.scenePhase) var scenePhase
     @StateObject private var viewModel = MemoPageViewModel()
     
     init() {
@@ -49,7 +50,7 @@ struct MemoPageView: View {
                                     date: viewModel.date,
                                     item: item,
                                     initialLoad: $viewModel.initialLoad,
-                                    number: Double(viewModel.items.firstIndex(of: item) ?? 0),
+                                    placement: Double(viewModel.items.firstIndex(of: item) ?? 0),
                                     completeItem: {_ in viewModel.completeTask(item) },
                                     deleteItem: {_ in viewModel.deleteItem(item) },
                                     updatingTaskBool: $viewModel.updatingTaskBool,
@@ -85,6 +86,11 @@ struct MemoPageView: View {
                 .offset(x: viewModel.showTaskEditor ? 0: UIScreen.mainWidth)
             }
             .opacity(viewModel.showTaskEditor || viewModel.chooseDate  ? 1 : 0)
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                viewModel.date = Date.now
+            }
         }
         .onChange(of: viewModel.date) { _ in
             withAnimation {

@@ -12,7 +12,6 @@ struct BulletPoint: View {
 
     var grow: Bool
     var initialLoad: Bool
-    var number: Double
     let diameter: CGFloat = 15
     
     var body: some View {
@@ -32,6 +31,6 @@ struct BulletPoint: View {
 
 struct BulletPoint_Previews: PreviewProvider {
     static var previews: some View {
-        BulletPoint(grow: false, initialLoad: false, number: 0.0)
+        BulletPoint(grow: false, initialLoad: false)
     }
 }

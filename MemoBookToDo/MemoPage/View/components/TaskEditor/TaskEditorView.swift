@@ -70,20 +70,7 @@ struct TaskEditorView: View {
             .padding(10)
             
             Button {
-                let deadline = taskDeadlineBool ? taskDeadline : nil
-                
-                if updating {
-                    if let itemToUpdate = itemToUpdate {
-                        self.updateItem(itemToUpdate, taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
-                    }
-                } else {
-                    self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
-                }
-                
-                withAnimation{
-                    updating = false
-                    showEditor.toggle()
-                }
+                saveTask()
             } label: {
                 Text(updating ? "Update Task" : "Save Task")
                     .font(.system(size: regularText, weight: .semibold))
@@ -109,28 +96,51 @@ struct TaskEditorView: View {
         )
         .padding()
         .onChange(of: showEditor) { _ in
-            if showEditor && updating {
-                taskName = itemToUpdate?.name ?? "No Name"
-                taskDeadline = itemToUpdate?.taskDeadline ?? Calendar.current.startOfDay(for: date)
-                taskDeadlineBool = itemToUpdate?.taskDeadline != nil
-                ongoing = itemToUpdate?.ongoing ?? false
-                selection = priorities[Int(itemToUpdate?.priority ?? 0)]
-                
-            } else {
-                let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
-                    taskName = ""
-                    taskDeadline = Calendar.current.startOfDay(for: date)
-                    taskDeadlineBool = false
-                    ongoing = false
-                    selection = "None"
-                    textIsFocused = false
-                    itemToUpdate = nil
-                    updating = false
-                }
+            showEditorOnChange()
+        }
+    }
+    
+    private func saveTask() {
+        let deadline = taskDeadlineBool ? taskDeadline : nil
+        
+        if updating {
+            if let itemToUpdate = itemToUpdate {
+                self.updateItem(itemToUpdate, taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
+            }
+        } else {
+            self.addItem(taskName, ongoing, Int16(priorities.firstIndex(of: selection) ?? 0), deadline)
+        }
+        
+        withAnimation{
+            updating = false
+            showEditor.toggle()
+        }
+    }
+    
+    private func showEditorOnChange() {
+        if showEditor && updating {
+            taskName = itemToUpdate?.name ?? "No Name"
+            taskDeadline = itemToUpdate?.taskDeadline ?? Calendar.current.startOfDay(for: date)
+            taskDeadlineBool = itemToUpdate?.taskDeadline != nil
+            ongoing = itemToUpdate?.ongoing ?? false
+            selection = priorities[Int(itemToUpdate?.priority ?? 0)]
+            
+        } else {
+            let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
+                taskName = ""
+                taskDeadline = Calendar.current.startOfDay(for: date)
+                taskDeadlineBool = false
+                ongoing = false
+                selection = "None"
+                textIsFocused = false
+                itemToUpdate = nil
+                updating = false
             }
         }
     }
 }
+
+
 
 struct TaskEditorView_Previews: PreviewProvider {
     static var previews: some View {

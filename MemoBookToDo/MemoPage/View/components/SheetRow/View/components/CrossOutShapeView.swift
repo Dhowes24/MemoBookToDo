@@ -16,14 +16,14 @@ struct CrossOutShapeView: View{
 
     var completed: Bool
     var initialLoad: Bool
-    var number: Double
+    var placement: Double
     var multi: Bool
     var squiggle: Squiggle
     
-    init(completed: Bool, distances: [UInt8], initialLoad: Bool, number: Double, multi: Bool = false) {
+    init(completed: Bool, distances: [UInt8], initialLoad: Bool, placement: Double, multi: Bool = false) {
         self.completed = completed
         self.initialLoad = initialLoad
-        self.number = number
+        self.placement = placement
         self.multi = multi
         
         var distancesInts: [Int] = []
@@ -91,7 +91,7 @@ struct Squiggle: Shape {
 
 struct CrossOutShapeView_Previews: PreviewProvider {
     static var previews: some View {
-        CrossOutShapeView(completed: true, distances: [8,8,8,8], initialLoad: false, number: 0.0)
+        CrossOutShapeView(completed: true, distances: [8,8,8,8], initialLoad: false, placement: 0.0)
             .showLayoutGuides(true)
     }
 }

@@ -117,14 +117,7 @@ class MemoPageViewModel: ObservableObject {
                     return $0.dateCreated! < $1.dateCreated!
                 }
             })
-            
-//            print("\n sorting for \(date)")
-//            for i in items {
-//                print(i.name ?? "no Name")
-//                print(i.dateCreated!)
-//                print(i.id)
-//                print("\n")
-//            }
+
         } catch let error {
             print("Error fetching. \(error)")
         }
@@ -173,9 +166,8 @@ class MemoPageViewModel: ObservableObject {
     func setLocalNotification(deadline: Date?, taskName: String) {
         if let deadline = deadline {
             if Calendar.current.date(byAdding: .minute, value: -10, to: deadline)! > Date.now {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "hh:mm a"
-                let hourString = formatter.string(from: deadline)
+                dateFormatter.dateFormat = "hh:mm a"
+                let hourString = dateFormatter.string(from: deadline)
                 
                 let content = UNMutableNotificationContent()
                 content.title = "\(hourString)"

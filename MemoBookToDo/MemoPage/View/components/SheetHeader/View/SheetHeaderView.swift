@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SheetHeaderView: View {
-    @Environment(\.scenePhase) var scenePhase
+    @StateObject private var viewModel: SheetHeaderViewModel = SheetHeaderViewModel()
     
     @Binding var chooseDate: Bool
     @Binding var date: Date
@@ -45,7 +45,7 @@ struct SheetHeaderView: View {
                 }
                 
                 Group {
-                    Text(todaysName())
+                    Text(viewModel.todaysName(date: date))
                         .font(.system(size: 36))
                     Text(date, style: .date)
                         .font(.system(size: 14))
@@ -101,28 +101,6 @@ struct SheetHeaderView: View {
                 }
             })
         )
-        .onChange(of: scenePhase) { newPhase in
-            if newPhase == .background {
-                date = Date.now
-            }
-        }
-    }
-    
-    
-    func todaysName() -> String{
-        let f = DateFormatter()
-        let diff = Calendar.current.numberOfDaysBetween(Date.now, and: date)
-
-        switch diff {
-        case -1:
-            return "Yesterday"
-        case 0:
-            return "Today"
-        case 1:
-            return "Tomorrow"
-        default:
-            return f.weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
-        }
     }
 }
 
