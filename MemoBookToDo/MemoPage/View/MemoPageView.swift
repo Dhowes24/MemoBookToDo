@@ -88,9 +88,7 @@ struct MemoPageView: View {
             .opacity(viewModel.showTaskEditor || viewModel.chooseDate  ? 1 : 0)
         }
         .onChange(of: scenePhase) { newPhase in
-            if newPhase == .background {
                 viewModel.date = Date.now
-            }
         }
         .onChange(of: viewModel.date) { _ in
             withAnimation {
