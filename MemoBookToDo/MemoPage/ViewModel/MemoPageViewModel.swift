@@ -29,6 +29,7 @@ class MemoPageViewModel: ObservableObject {
     func addItem(name: String, ongoing: Bool,  priority: Int16, deadline: Date?) {
         let item = ListItem(context: mainContext)
         item.completed = false
+        print(Calendar.current.numberOfDaysBetween(date, and: Date.now) != 0)
         if Calendar.current.numberOfDaysBetween(date, and: Date.now) != 0 {
             var organizationCounter = 0
             var tempDateCreated: Date
@@ -52,7 +53,7 @@ class MemoPageViewModel: ObservableObject {
             
             item.dateCreated = tempDateCreated
         } else {
-            item.dateCreated = date
+            item.dateCreated = Date.now
         }
         item.name = name
         item.ongoing = ongoing
