@@ -144,7 +144,7 @@ struct SheetRowView: View {
                    minHeight: multiline ?  doubleRowHeight : rowHeight,
                    maxHeight: multiline ?  doubleRowHeight : rowHeight)
             .background(paperWhite)
-                        
+            
             HStack(){
                 Color.clear
                     .contentShape(Rectangle())
@@ -208,7 +208,6 @@ struct SheetRowViewModifier: ViewModifier {
                                 completeItem(item)
                             }
                             completed.toggle()
-     
                         }
                     }
             )
