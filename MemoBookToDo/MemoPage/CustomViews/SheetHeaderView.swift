@@ -24,7 +24,7 @@ struct SheetHeaderView: View {
             VStack(spacing: 0){
                 HStack {
                     ForEach(0..<numOfHoles, id: \.self) { _ in
-                        SheetHeaderPunchHoleView()
+                        BinderRing()
                     }
                 }
                 .padding(.bottom, 15)

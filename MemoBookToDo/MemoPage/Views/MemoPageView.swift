@@ -36,8 +36,8 @@ struct MemoPageView: View {
                                     initialLoad: .constant(false),
                                     updatingTaskBool: .constant(false),
                                     updatingTaskItem: .constant(nil),
-                                    showTaskEditor: .constant(false))
-                                
+                                    showTaskEditor: .constant(false)
+                                )
                             }
                             SheetRowSeparator()
                         }

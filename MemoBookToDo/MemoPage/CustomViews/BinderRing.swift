@@ -1,16 +1,14 @@
 //
-//  SheetHeaderPunchHoleView.swift
+//  HolePunch.swift
 //  MemoBookToDo
 //
-//  Created by Derek Howes on 3/27/23.
+//  Created by Derek Howes on 2/26/24.
 //
 
 import SwiftUI
-import PureSwiftUI
+import PureSwiftUIDesign
 
-private let gridLayoutGuide = LayoutGuideConfig.grid(columns: 20, rows: 20)
-
-struct SheetHeaderPunchHoleView: View {
+struct BinderRing: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -18,10 +16,10 @@ struct SheetHeaderPunchHoleView: View {
             ZStack {
                 Circle()
                     .fill(colorScheme == .dark ? .black : offBlack)
-                    .frame(width: 30,height: 30, alignment: .leading)
+                    .frame(width: 30, height: 30, alignment: .leading)
                     .padding(.horizontal, 4)
                 
-                    BinderRing()
+                    Ring()
                         .fill(
                             LinearGradient(gradient: Gradient(colors: [.gray, .gray, .white, .gray]), startPoint: .top, endPoint: .bottom)
                         )
@@ -33,8 +31,9 @@ struct SheetHeaderPunchHoleView: View {
     }
 }
 
-private struct BinderRing: Shape {
-    
+private let gridLayoutGuide = LayoutGuideConfig.grid(columns: 20, rows: 20)
+
+struct Ring: Shape {
     func path(in rect: CGRect) -> Path {
         
         var path = Path()
@@ -60,9 +59,6 @@ private struct BinderRing: Shape {
     }
 }
 
-struct SheetHeaderPunchHoleView_Previews: PreviewProvider {
-    static var previews: some View {
-        SheetHeaderPunchHoleView()
-            .showLayoutGuides(true)
-    }
+#Preview {
+    BinderRing()
 }
