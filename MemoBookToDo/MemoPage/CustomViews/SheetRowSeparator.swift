@@ -10,7 +10,7 @@ import SwiftUI
 struct SheetRowSeparator: View {
     var body: some View {
         Rectangle()
-            .fill(blueSeparator)
+            .fill(colors.blueSeparator)
             .frame(maxWidth: .infinity, maxHeight: 2)
     }
 }

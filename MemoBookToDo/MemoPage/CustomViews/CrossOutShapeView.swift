@@ -42,7 +42,7 @@ struct CrossOutShapeView: View{
             squiggle
                 .trim(from: 0, to: completed ? 1 : 0)
                 .stroke(
-                    colorScheme == .dark ? paperWhite : offBlack,
+                    colorScheme == .dark ? colors.paperWhite : colors.offBlack,
                     style: StrokeStyle(lineWidth: 5, lineCap: .round)
                 )
                 .frame(height: 25)

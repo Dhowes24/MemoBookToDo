@@ -39,7 +39,7 @@ struct SheetHeaderView: View {
                             .resizable()
                             .frame(width: 35, height: 35)
                             .padding(.horizontal, 15)
-                            .foregroundColor(offBlack)
+                            .foregroundColor(colors.offBlack)
                     }
                     Spacer()
                 }
@@ -50,7 +50,7 @@ struct SheetHeaderView: View {
                     Text(date, style: .date)
                         .font(.system(size: 14))
                 }
-                .foregroundColor(offBlack)
+                .foregroundColor(colors.offBlack)
                 .offset( x:offsetAnimation, y:0)
                 .offset( x:offset.width / 4 , y:0)
                 
@@ -68,7 +68,7 @@ struct SheetHeaderView: View {
                             .frame(width: 18, height: 18)
                             .padding(.horizontal, 15)
                             .padding(.bottom, 5)
-                            .foregroundColor(offBlack)
+                            .foregroundColor(colors.offBlack)
                     }
                 }
             }
@@ -77,7 +77,7 @@ struct SheetHeaderView: View {
             width: UIScreen.main.bounds.width,
             height: 230)
         .padding(.bottom, 10)
-        .background(paperWhite)
+        .background(colors.paperWhite)
         .gesture(
             DragGesture().onChanged(
                 { gesture in

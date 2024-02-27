@@ -33,7 +33,7 @@ struct TaskEditorView: View {
                 .frame(height: 60, alignment: .topLeading)
                 .font(.system(size:regularText))
                 .padding()
-                .backgroundColor(paperWhite)
+                .backgroundColor(colors.paperWhite)
                 .cornerRadius(5)
                 .padding(10)
                 .focused($textIsFocused)
@@ -78,7 +78,7 @@ struct TaskEditorView: View {
                     .padding(.horizontal, capsuleHorizontalPadding)
                     .background(
                     RoundedRectangle(10)
-                        .fill(paperWhite)
+                        .fill(colors.paperWhite)
                         .shadow(radius: 2, x: 0, y:3)
                     )
                     .padding(10)

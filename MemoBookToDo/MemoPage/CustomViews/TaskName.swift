@@ -17,7 +17,7 @@ struct TaskName: View {
         ZStack {
             HStack(alignment: .bottom){
                 Text(name)
-                    .foregroundColor(offBlack)
+                    .foregroundColor(colors.offBlack)
                     .font(.system(size: taskNameFontSize))
                     .padding(.horizontal, 10)
                     .lineSpacing(15)
@@ -41,6 +41,6 @@ struct TaskName: View {
 
 struct TaskName_Previews: PreviewProvider {
     static var previews: some View {
-        TaskName(grow: true, name: "Do A Chore", priorityColor: priorityLow, multiline: false)
+        TaskName(grow: true, name: "Do A Chore", priorityColor: colors.priorityLow, multiline: false)
     }
 }

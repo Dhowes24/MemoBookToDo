@@ -14,7 +14,7 @@ struct TrashLabel: View {
     var body: some View {
         Image(sfSymbol: "trash")
             .frame(width: 40, height: multiline ?  doubleRowHeight : rowHeight)
-            .foregroundColor(paperWhite)
+            .foregroundColor(colors.paperWhite)
             .background(
                 Rectangle()
                     .fill(.red)

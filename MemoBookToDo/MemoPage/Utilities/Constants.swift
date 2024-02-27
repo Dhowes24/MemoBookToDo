@@ -10,12 +10,16 @@ import SwiftUI
 
 //Colors
 //_______________________________________________________
-let blueSeparator: Color = Color.init(hex: 0x6296C6)
-let paperWhite: Color = Color.init(hex: 0xF5F5F5)
-let priorityLow: Color = Color.init(hex: 0xB3F395)
-let priorityMedium: Color = Color.init(hex: 0xF4DD88)
-let priorityHigh: Color = Color.init(hex: 0xf48f88)
-let offBlack: Color = Color.init(hex: 0x363636)
+
+enum colors {
+    static let blueSeparator: Color = Color.init(hex: 0x6296C6)
+    static let paperWhite: Color = Color.init(hex: 0xF5F5F5)
+    static let priorityLow: Color = Color.init(hex: 0xB3F395)
+    static let priorityMedium: Color = Color.init(hex: 0xF4DD88)
+    static let priorityHigh: Color = Color.init(hex: 0xf48f88)
+    static let offBlack: Color = Color.init(hex: 0x363636)
+}
+
 let opacityVal = 0.4
 
 //Animations

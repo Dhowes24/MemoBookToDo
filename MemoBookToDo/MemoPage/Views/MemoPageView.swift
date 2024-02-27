@@ -62,7 +62,7 @@ struct MemoPageView: View {
                 }
                 .padding(.bottom, 30)
             }
-            .backgroundColor(paperWhite)
+            .backgroundColor(colors.paperWhite)
             .ignoresSafeArea()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             ZStack(alignment: .center){

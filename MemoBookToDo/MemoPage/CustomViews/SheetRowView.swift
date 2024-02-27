@@ -78,7 +78,7 @@ struct SheetRowView: View {
                             TrashLabel(dragAmount: viewModel.dragAmount, multiline: viewModel.multiline)
                         }
                     }
-                    .background(paperWhite)
+                    .background(colors.paperWhite)
                     .modifier(SheetRowViewModifier(
                         completed: $viewModel.completed,
                         date: viewModel.date,
@@ -111,7 +111,7 @@ struct SheetRowView: View {
             .frame(maxWidth: .infinity,
                    minHeight: viewModel.multiline ?  doubleRowHeight : rowHeight,
                    maxHeight: viewModel.multiline ?  doubleRowHeight : rowHeight)
-            .background(paperWhite)
+            .background(colors.paperWhite)
             
             HStack(){
                 Color.clear

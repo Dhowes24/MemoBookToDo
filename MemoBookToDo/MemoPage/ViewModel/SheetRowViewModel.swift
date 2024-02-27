@@ -57,13 +57,13 @@ class SheetRowViewModel: ObservableObject {
     func priorityColor(_ item: ListItem) -> Color{
         switch item.priority{
         case 1:
-            return priorityLow
+            return colors.priorityLow
         case 2:
-            return priorityMedium
+            return colors.priorityMedium
         case 3:
-            return priorityHigh
+            return colors.priorityHigh
         default:
-            return paperWhite.opacity(0)
+            return colors.paperWhite.opacity(0)
         }
     }
     

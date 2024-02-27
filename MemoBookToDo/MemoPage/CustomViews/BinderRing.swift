@@ -15,7 +15,7 @@ struct BinderRing: View {
         VStack{
             ZStack {
                 Circle()
-                    .fill(colorScheme == .dark ? .black : offBlack)
+                    .fill(colorScheme == .dark ? .black : colors.offBlack)
                     .frame(width: 30, height: 30, alignment: .leading)
                     .padding(.horizontal, 4)
                 

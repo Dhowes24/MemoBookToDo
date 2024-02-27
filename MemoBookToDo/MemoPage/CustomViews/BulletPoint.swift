@@ -17,7 +17,7 @@ struct BulletPoint: View {
     var body: some View {
         ZStack{
             Circle()
-                .fill(colorScheme == .dark ? paperWhite : offBlack)
+                .fill(colorScheme == .dark ? colors.paperWhite : colors.offBlack)
                 .frame(width: diameter,height: diameter, alignment: .leading)
                 .padding(.horizontal, diameter)
                 .reverseMask {
