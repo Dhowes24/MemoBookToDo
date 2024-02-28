@@ -8,20 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct SheetRowViewModifier: ViewModifier {
+struct sheetRowOnAppearViewMod: ViewModifier {
     @Binding var completed: Bool
-    var date: Date
-    @Binding var delete: Bool
-    @Binding var drag : CGSize
     @Binding var grow: Bool
     @Binding var initialLoad: Bool
     var item: ListItem
-    var itemName: String
-    @Binding var multiline: Bool
     var placement: Double
-    
-    var completeItem: ((ListItem) -> Void)?
-    var deleteItem: ((ListItem) -> Void)?
     
     func body(content: Content) -> some View {
         content
@@ -31,6 +23,19 @@ struct SheetRowViewModifier: ViewModifier {
                     completed = item.completed
                 }
             })
+    }
+}
+
+
+struct sheetRowDeleteViewMod: ViewModifier {
+    @Binding var delete: Bool
+    @Binding var drag : CGSize
+    var item: ListItem
+    
+    var deleteItem: ((ListItem) -> Void)?
+    
+    func body(content: Content) -> some View {
+        content
             .simultaneousGesture(
                 DragGesture()
                     .onChanged({
@@ -50,6 +55,19 @@ struct SheetRowViewModifier: ViewModifier {
                         }
                     })
             )
+    }
+}
+
+
+struct sheetRowTapGestureViewMod: ViewModifier {
+    @Binding var completed: Bool
+    @Binding var initialLoad: Bool
+    var item: ListItem
+    
+    var completeItem: ((ListItem) -> Void)?
+    
+    func body(content: Content) -> some View {
+        content
             .simultaneousGesture(
                 TapGesture()
                     .onEnded { _ in
@@ -62,6 +80,16 @@ struct SheetRowViewModifier: ViewModifier {
                         }
                     }
             )
+    }
+}
+
+
+struct sheetRowNameChangeViewMod: ViewModifier {
+    var itemName: String
+    @Binding var multiline: Bool
+    
+    func body(content: Content) -> some View {
+        content
             .onChange(of: itemName) { newName in
                 let nameWidth: CGFloat = newName.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width
                 if nameWidth > taskWidthAvailable {
@@ -70,5 +98,31 @@ struct SheetRowViewModifier: ViewModifier {
                     multiline = false
                 }
             }
+    }
+}
+
+
+struct sheetRowTaskEditViewMod: ViewModifier {
+    var currentItem: ListItem
+    @GestureState var press: Bool
+    @Binding var updatingTaskBool: Bool
+    @Binding var updatingTaskItem: ListItem?
+    @Binding var showTaskEditor: Bool
+    
+    func body(content: Content) -> some View {
+        content
+            .simultaneousGesture (
+                LongPressGesture(minimumDuration: 0.6)
+                    .updating($press) { currentState, gestureState, transaction in
+                        gestureState = currentState
+                    }
+                    .onEnded{ finished in
+                        withAnimation {
+                            updatingTaskBool = true
+                            updatingTaskItem = currentItem
+                            showTaskEditor = true
+                        }
+                    }
+            )
     }
 }

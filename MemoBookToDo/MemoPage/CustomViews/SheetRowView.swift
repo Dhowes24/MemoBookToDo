@@ -111,32 +111,35 @@ struct SheetRowView: View {
                         }
                     }
                     .background(colors.paperWhite)
-                    .modifier(SheetRowViewModifier(
+                    .modifier(sheetRowOnAppearViewMod(
                         completed: $completed,
-                        date: date,
-                        delete: $delete,
-                        drag: $dragAmount,
                         grow: $grow,
                         initialLoad: $initialLoad,
                         item: item,
-                        itemName: itemName,
-                        multiline: $multiline,
-                        placement: placement,
-                        completeItem: completeItem,
+                        placement: placement))
+                    
+                    .modifier(sheetRowDeleteViewMod(
+                        delete: $delete,
+                        drag: $dragAmount,
+                        item: item,
                         deleteItem: deleteItem))
-                    .simultaneousGesture (
-                        LongPressGesture(minimumDuration: 0.6)
-                            .updating($press) { currentState, gestureState, transaction in
-                                gestureState = currentState
-                            }
-                            .onEnded{ finished in
-                                withAnimation {
-                                    updatingTaskBool = true
-                                    updatingTaskItem = item
-                                    showTaskEditor = true
-                                }
-                            }
-                    )
+                    
+                    .modifier(sheetRowTapGestureViewMod(
+                        completed: $completed,
+                        initialLoad: $initialLoad,
+                        item: item,
+                        completeItem: completeItem))
+                    
+                    .modifier(sheetRowNameChangeViewMod(
+                        itemName: itemName,
+                        multiline: $multiline))
+
+                    .modifier(sheetRowTaskEditViewMod(
+                        currentItem: item,
+                        press: press,
+                        updatingTaskBool: $updatingTaskBool,
+                        updatingTaskItem: $updatingTaskItem,
+                        showTaskEditor: $showTaskEditor))
                 }
                 
             }
