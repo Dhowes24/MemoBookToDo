@@ -8,9 +8,24 @@
 import SwiftUI
 
 struct SheetRowView: View {
-    @StateObject private var viewModel: SheetRowViewModel
+    @StateObject private var viewModel: SheetRowViewModel = SheetRowViewModel()
+    
+    @State private var completed: Bool
+    private var date: Date
+    @State var delete: Bool = false
+    @State private var dragAmount = CGSize.zero
+    private var distances: [UInt8]
+    @State private var grow: Bool = false
+    var item: ListItem?
+    let itemName: String
+    @Binding var initialLoad: Bool
+    @State var multiline: Bool
+    var placement: Double = 0
     @GestureState var press = false
-
+    @Binding var updatingTaskBool: Bool
+    @Binding var updatingTaskItem: ListItem?
+    @Binding var showTaskEditor: Bool
+    
     var completeItem: ((ListItem) -> Void)?
     var deleteItem: ((ListItem) -> Void)?
     
@@ -24,72 +39,89 @@ struct SheetRowView: View {
          updatingTaskItem: Binding<ListItem?>,
          showTaskEditor: Binding<Bool>) {
         
-        _viewModel = StateObject(wrappedValue: SheetRowViewModel(
-            completed: false,
-            date: date,
-            item: item ?? nil,
-            initialLoad: initialLoad,
-            updatingTaskBool: updatingTaskBool,
-            updatingTaskItem: updatingTaskItem,
-            showTaskEditor: showTaskEditor
-        ))
-
+        _completed = State(initialValue: false)
+        self.date = date
+        self.distances = item?.name?.asciiValues ?? [8,8,8,8]
+        self.item = item
+        
+        if item?.taskDeadline != nil {
+            dateFormatter.dateFormat = "hh:mm a"
+            let hourString = dateFormatter.string(from: item!.taskDeadline!)
+            self.itemName = "\(hourString): \(item?.name ?? "Error")"
+        } else {
+            self.itemName = item?.name ?? "Error"
+        }
+        _initialLoad = initialLoad
+        
+        let nameWidth: CGFloat = itemName.size(withAttributes: [.font: UIFont.systemFont(ofSize: taskNameFontSize)]).width
+        if nameWidth > taskWidthAvailable {
+            _multiline = State(initialValue: true)
+        } else {
+            _multiline = State(initialValue: false)
+        }
+        
+        _updatingTaskBool = updatingTaskBool
+        _updatingTaskItem = updatingTaskItem
+        _showTaskEditor = showTaskEditor
+        
+        self.placement = placement
         self.completeItem = completeItem
         self.deleteItem = deleteItem
     }
     
     var body: some View {
+        
         ZStack {
             HStack(alignment: .center) {
-                if let item = viewModel.item{
+                if let item = item{
                     Group {
                         ZStack(){
-                            if viewModel.multiline{
+                            if multiline{
                                 SheetRowSeparator()
                             }
                             Group{
                                 HStack(){
-                                    BulletPoint(grow: viewModel.grow, initialLoad: viewModel.initialLoad)
-                                        .offset(x:0, y: viewModel.multiline ? -20 : 0)
-                                    TaskName(grow: viewModel.grow,
-                                             name: viewModel.itemName,
+                                    BulletPoint(grow: grow, initialLoad: initialLoad)
+                                        .offset(x:0, y: multiline ? -20 : 0)
+                                    TaskName(grow: grow,
+                                             name: itemName,
                                              priorityColor: viewModel.priorityColor(item),
-                                             multiline: viewModel.multiline)
+                                             multiline: multiline)
                                     Spacer()
                                 }
-                                .offset(x: viewModel.delete ? -UIScreen.mainWidth : 0 , y:0)
-                                CrossOutShapeView(completed: viewModel.completed,
-                                                  distances: viewModel.distances,
-                                                  initialLoad: viewModel.initialLoad,
-                                                  placement: viewModel.placement)
-                                .offset(x:0, y: viewModel.multiline ? -20 : 0)
+                                .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
+                                CrossOutShapeView(completed: completed,
+                                                  distances: distances,
+                                                  initialLoad: initialLoad,
+                                                  placement: placement)
+                                .offset(x:0, y: multiline ? -20 : 0)
                                 
-                                if viewModel.multiline {
-                                    CrossOutShapeView(completed: viewModel.completed,
-                                                      distances: viewModel.distances,
-                                                      initialLoad: viewModel.initialLoad,
-                                                      placement: viewModel.placement,
+                                if multiline {
+                                    CrossOutShapeView(completed: completed,
+                                                      distances: distances,
+                                                      initialLoad: initialLoad,
+                                                      placement: placement,
                                                       multi: true)
                                     .offset(x:0, y: 20)
-                                    .offset(x: viewModel.delete ? -UIScreen.mainWidth : 0 , y:0)
+                                    .offset(x: delete ? -UIScreen.mainWidth : 0 , y:0)
                                 }
                             }
                             .opacity(press ? 0.5 : 1.0)
-                            TrashLabel(dragAmount: viewModel.dragAmount, multiline: viewModel.multiline)
+                            TrashLabel(dragAmount: dragAmount, multiline: multiline)
                         }
                     }
                     .background(colors.paperWhite)
                     .modifier(SheetRowViewModifier(
-                        completed: $viewModel.completed,
-                        date: viewModel.date,
-                        delete: $viewModel.delete,
-                        drag: $viewModel.dragAmount,
-                        grow: $viewModel.grow,
-                        initialLoad: $viewModel.initialLoad,
+                        completed: $completed,
+                        date: date,
+                        delete: $delete,
+                        drag: $dragAmount,
+                        grow: $grow,
+                        initialLoad: $initialLoad,
                         item: item,
-                        itemName: viewModel.itemName,
-                        multiline: $viewModel.multiline,
-                        placement: viewModel.placement,
+                        itemName: itemName,
+                        multiline: $multiline,
+                        placement: placement,
                         completeItem: completeItem,
                         deleteItem: deleteItem))
                     .simultaneousGesture (
@@ -99,9 +131,9 @@ struct SheetRowView: View {
                             }
                             .onEnded{ finished in
                                 withAnimation {
-                                    viewModel.updatingTaskBool = true
-                                    viewModel.updatingTaskItem = viewModel.item
-                                    viewModel.showTaskEditor = true
+                                    updatingTaskBool = true
+                                    updatingTaskItem = item
+                                    showTaskEditor = true
                                 }
                             }
                     )
@@ -109,16 +141,16 @@ struct SheetRowView: View {
                 
             }
             .frame(maxWidth: .infinity,
-                   minHeight: viewModel.multiline ?  doubleRowHeight : rowHeight,
-                   maxHeight: viewModel.multiline ?  doubleRowHeight : rowHeight)
+                   minHeight: multiline ?  doubleRowHeight : rowHeight,
+                   maxHeight: multiline ?  doubleRowHeight : rowHeight)
             .background(colors.paperWhite)
             
             HStack(){
                 Color.clear
                     .contentShape(Rectangle())
                     .frame(maxWidth: 50,
-                           minHeight: viewModel.multiline ?  doubleRowHeight : rowHeight,
-                           maxHeight: viewModel.multiline ?  doubleRowHeight : rowHeight)
+                           minHeight: multiline ?  doubleRowHeight : rowHeight,
+                           maxHeight: multiline ?  doubleRowHeight : rowHeight)
                 Spacer()
             }
         }
